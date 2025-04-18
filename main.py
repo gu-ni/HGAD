@@ -33,8 +33,6 @@ def parse_args():
                         help='number of intra-class centers (default: 10)')
     
     # Data configures
-    parser.add_argument('--dataset', default='mvtec', type=str,
-                        choices=['mvtec', 'btad', 'mvtec3d', 'visa', 'union'])
     parser.add_argument('--img_size', default=1024, type=int, 
                         help='image size (default: 1024)')
     parser.add_argument('--msk_size', default=256, type=int, 
@@ -59,7 +57,7 @@ def parse_args():
                         help='temp of cosine learning rate scheduler (default: 0.5)')                    
     parser.add_argument('--meta_epochs', type=int, default=25, 
                         help='number of meta epochs to train (default: 25)')
-    parser.add_argument('--sub_epochs', type=int, default=8, 
+    parser.add_argument('--sub_epochs', type=int, default=1, 
                         help='number of sub epochs to train (default: 8)')
     
     # misc
@@ -72,6 +70,12 @@ def parse_args():
     parser.add_argument('--output_dir', default='./outputs', type=str, 
                         help='directory to save model weights')
     
+    parser.add_argument('--base_json', default='base_classes', type=str,)
+    parser.add_argument('--task_json', default='5classes_tasks', type=str,)
+    parser.add_argument('--phase', default='base', type=str, choices=['base', 'continual'],)
+    parser.add_argument('--pretrained_path', type=str, default='outputs/HGAD_base_img.pt')
+
+    
     args = parser.parse_args()
     
     return args
@@ -83,22 +87,5 @@ if __name__ == '__main__':
     setting_lr_parameters(args)
     
     args.device = torch.device("cuda:" + args.gpu)
-    
-    # set dataset path
-    if args.dataset == 'mvtec':
-        args.data_path = '/data/data1/yxc/datasets/mvtec_anomaly_detection'
-    elif args.dataset == 'btad':
-        args.data_path = '/data/data1/yxc/datasets/btad'
-    elif args.dataset == 'mvtec3d':
-        args.data_path = '/data/data1/yxc/datasets/mvtec_3d_anomaly_detection'
-    elif args.dataset == 'visa':
-        args.data_path = '/data/data1/yxc/datasets/visa'
-    elif args.dataset == 'union':
-        args.data_path = ['/data/data1/yxc/datasets/mvtec_anomaly_detection',
-                          '/data/data1/yxc/datasets/btad',
-                          '/data/data1/yxc/datasets/mvtec_3d_anomaly_detection',
-                          '/data/data1/yxc/datasets/visa']
-    else:
-        raise ValueError('Unrecognized or unsupported dataset!')
     
     train.train(args)

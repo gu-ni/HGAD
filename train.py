@@ -24,6 +24,16 @@ from datasets.json_loader import prepare_loader_from_json
 
 
 def train(args):
+    if args.phase == 'base':
+        if args.base_json == "base_classes":
+            num_classes = 85
+        else:
+            num_classes = 58
+    elif args.phase == 'continual':
+        num_classes = int(re.match(r'\d+', args.task_json_name).group())
+    
+    args.n_classes = num_classes
+    
     model = HGAD(args)
     model.to(args.device)
     
@@ -35,10 +45,10 @@ def train(args):
                                                     img_size=args.img_size, msk_size=args.img_size, train=True)
         
         optimizer = model.optimizer
-        for epoch in range(args.base_epochs):
+        for epoch in range(args.meta_epochs):
             model.train()
             
-            for idx, (image, label, *_) in enumerate(train_loader):
+            for idx, (image, label) in enumerate(train_loader):
             
                 # x: (N, 3, 256, 256) y: (N, )
                 image, label = image.to(args.device), label.to(args.device)  # (N, num_classes)
@@ -52,10 +62,7 @@ def train(args):
                     e = e.permute(0, 2, 3, 1).reshape(-1, dim)  # (bs*h*w, dim)
                     
                     label_r = label.view(-1, 1, 1).repeat([1, h, w])
-                    if args.base_json == "base_classes":
-                        num_classes = 85
-                    else:
-                        num_classes = 58
+                    
                     label_onehot = onehot(label_r.reshape(-1), num_classes, args.label_smoothing)
                     
                     # (bs, 128, h, w)
@@ -78,7 +85,7 @@ def train(args):
                     optimizer.step()
             print(f'[Base] Epoch {epoch+1}/{args.meta_epochs} completed.')
             
-        save_model(args.output_dir, model, args.base_epochs, 'base', flag='img')
+        save_model(args.output_dir, model, args.meta_epochs, 'base', flag='img')
         print(f'[Base] Training complete. Model saved.')
     
     elif args.phase == 'continual':
@@ -90,7 +97,6 @@ def train(args):
             num_all_tasks = 30
         else:
             num_all_tasks = 60
-        num_classes = int(re.match(r'\d+', args.task_json_name).group())
         num_tasks = num_all_tasks // num_classes
         optimizer = model.optimizer
 
@@ -99,9 +105,8 @@ def train(args):
             train_loader = prepare_loader_from_json(args.task_json_name, task_id=task_id,
                                                     batch_size=args.batch_size,
                                                     img_size=args.img_size, msk_size=args.img_size, train=True)
-            epochs = 20
-
-            for epoch in range(epochs):
+            
+            for epoch in range(args.meta_epochs):
                 model.train()
                 for idx, (image, label, *_ ) in enumerate(train_loader):
                     image, label = image.to(args.device), label.to(args.device)
@@ -130,7 +135,7 @@ def train(args):
                         loss.backward()
                         optimizer.step()
 
-                print(f'[Task {task_id}] Epoch {epoch+1}/{epochs} done.')
+                print(f'[Task {task_id}] Epoch {epoch+1}/{args.meta_epochs} done.')
 
             save_model(args.output_dir, model, task_id, f'task{task_id}', flag='img')
             print(f'[Task {task_id}] Finished and model saved.')

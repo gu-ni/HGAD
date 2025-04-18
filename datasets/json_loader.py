@@ -35,12 +35,22 @@ class JSONDataset(Dataset):
     def __init__(self, json_data, img_size=336, crp_size=336, msk_size=336, train=True):
         
         self.samples = []
+        self.num_all_samples = 0
         for cls_name, samples in json_data.items():
             for sample in samples:
-                if not sample["mask_path"]:
+                self.num_all_samples += 1
+                if train:
+                    if not sample["mask_path"]:
+                        img_path = self.resolve_path(sample["img_path"])
+                        self.samples.append((img_path, cls_name, None, None))
+                else:
                     img_path = self.resolve_path(sample["img_path"])
-                    self.samples.append((img_path, cls_name))
-        
+                    if sample["mask_path"]:
+                        mask_path = self.resolve_path(sample["mask_path"])
+                    else:
+                        mask_path = None
+                    anomaly = sample["anomaly"]
+                    self.samples.append((img_path, cls_name, mask_path, anomaly))
         self.data = json_data
         self.train = train
         self.masksize = msk_size
@@ -65,20 +75,32 @@ class JSONDataset(Dataset):
         for i, cls in enumerate(class_names):
             self.class_to_idx[cls] = i
             self.idx_to_class[i] = cls
-
+        
+        print(f"All samples: {self.num_all_samples}")
+        print(f"All samples: {self.num_all_samples}")
+        print(f"Loaded {len(self.samples)} samples from {len(class_names)} classes.")
+        print(f"Loaded {len(self.samples)} samples from {len(class_names)} classes.")
+        
     def __len__(self):
         return len(self.samples)
 
     def __getitem__(self, idx):
-        img_path, cls_name = self.samples[idx]
+        img_path, cls_name, mask_path, anomaly = self.samples[idx]
         image = Image.open(img_path).convert("RGB")
         image = self.transform(image)
+        if mask_path:
+            mask = Image.open(mask_path)
+            mask = self.target_transform(mask)
+        else:
+            mask = torch.zeros((1, self.masksize, self.masksize), dtype=torch.float32)
+
         label = self.class_to_idx[cls_name]
         
-        return image, label
+        return image, label, mask, anomaly
 
 
 def prepare_loader_from_json(json_path, task_id=None, batch_size=8, img_size=336, msk_size=336, train=True):
+    json_path = os.path.join("/workspace/meta_files", f"{json_path}.json")
     with open(json_path, 'r') as f:
         data_dict = json.load(f)
     if task_id is None:
