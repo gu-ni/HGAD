@@ -37,13 +37,9 @@ class JSONDataset(Dataset):
         self.samples = []
         for cls_name, samples in json_data.items():
             for sample in samples:
-                img_path = self.resolve_path(sample["img_path"])
-                if sample["mask_path"]:
-                    mask_path = self.resolve_path(sample["mask_path"])
-                else:
-                    mask_path = None
-                anomaly = sample["anomaly"]
-                self.samples.append((img_path, mask_path, anomaly, cls_name))
+                if not sample["mask_path"]:
+                    img_path = self.resolve_path(sample["img_path"])
+                    self.samples.append((img_path, cls_name))
         
         self.data = json_data
         self.train = train
@@ -74,34 +70,12 @@ class JSONDataset(Dataset):
         return len(self.samples)
 
     def __getitem__(self, idx):
-        img_path, mask_path, anomaly, cls_name = self.samples[idx]
+        img_path, cls_name = self.samples[idx]
         image = Image.open(img_path).convert("RGB")
         image = self.transform(image)
-        
-        if mask_path:
-            mask = Image.open(mask_path)
-            mask = self.target_transform(mask)
-            mask = 1.0 - torch.all(mask == 0, dim=0).float()
-        else:
-            C, W, H = image.shape
-            mask = torch.zeros((W, H))
-            
-            
-        
-        
-        entry = self.data[idx]
-        image = Image.open(entry['img_path']).convert('RGB')
-        image = self.transform(image)
-
-        if entry['anomaly'] == 0:
-            mask = torch.zeros([1, self.masksize, self.masksize])
-        else:
-            mask = Image.open(entry['mask_path'])
-            mask = self.target_transform(mask)
-
         label = self.class_to_idx[cls_name]
         
-        return image, label, mask, os.path.basename(entry['img_path']), 'json'
+        return image, label
 
 
 def prepare_loader_from_json(json_path, task_id=None, batch_size=8, img_size=336, msk_size=336, train=True):
