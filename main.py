@@ -70,13 +70,28 @@ def parse_args():
     parser.add_argument('--output_dir', default='./outputs', type=str, 
                         help='directory to save model weights')
     
-    parser.add_argument('--base_json', default='base_classes', type=str,)
-    parser.add_argument('--task_json', default='5classes_tasks', type=str,)
-    parser.add_argument('--phase', default='base', type=str, choices=['base', 'continual'],)
+    parser.add_argument('--json_path', default='base_classes', type=str,)
     parser.add_argument('--pretrained_path', type=str, default='outputs/HGAD_base_img.pt')
 
     
     args = parser.parse_args()
+    
+    # base training
+    if args.json_path.startswith("base"):
+        if args.json_path.endswith("classes"):
+            scenario = "scenario_1"
+        elif args.json_path.endswith("except_mvtec_visa"):
+            scenario = "scenario_2"
+        elif args.json_path.endswith("except_continual_ad"):
+            scenario = "scenario_3"
+        else:
+            raise ValueError("Invalid json_path for base training.")
+    # continual training
+    else:
+        if args.json_path.startswith("5classes"):
+            scenario = "scenario_4"
+            
+    args.output_dir = f"./outputs/{scenario}/5classes"
     
     return args
     

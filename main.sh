@@ -10,9 +10,8 @@ PHASE=$1
 IMG_SIZE=336
 BATCH_SIZE=16
 SEED=42
-OUTPUT_DIR="./outputs"
-BASE_JSON="base_classes"
-TASK_JSON="5classes_tasks"
+OUTPUT_DIR="./outputs/scenario_1/5classes"
+JSON_PATH="base_classes"
 PRETRAINED_PATH="${OUTPUT_DIR}/HGAD_base_img.pt"
 
 # 실행 분기
@@ -26,7 +25,7 @@ if [ "$PHASE" = "base" ]; then
         --batch_size $BATCH_SIZE \
         --seed $SEED \
         --output_dir $OUTPUT_DIR \
-        --base_json $BASE_JSON
+        --json_path $JSON_PATH
 
 elif [ "$PHASE" = "continual" ]; then
     echo "[CONTINUAL PHASE] 시작"
@@ -38,7 +37,7 @@ elif [ "$PHASE" = "continual" ]; then
         --batch_size $BATCH_SIZE \
         --seed $SEED \
         --output_dir $OUTPUT_DIR \
-        --task_json $TASK_JSON \
+        --json_path $JSON_PATH \
         --pretrained_path $PRETRAINED_PATH
 
 else

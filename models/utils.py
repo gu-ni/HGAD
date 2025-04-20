@@ -16,7 +16,9 @@ def save_model(path, model, current_epoch, dataset_name, flag='img'):
 
 def load_model(path, model):
     state_dict = torch.load(path)
-    model.nfs = [nf.load_state_dict(state, strict=False) for nf, state in zip(model.nfs, state_dict['nfs'])]
+    # model.nfs = [nf.load_state_dict(state, strict=False) for nf, state in zip(model.nfs, state_dict['nfs'])]
+    for nf, state in zip(model.nfs, state_dict['nfs']):
+        nf.load_state_dict(state, strict=False)
     model.phi_inters.load_state_dict(state_dict['phi_inters'])
     model.phi_intras.load_state_dict(state_dict['phi_intras'])
     model.mus.load_state_dict(state_dict['mus'])

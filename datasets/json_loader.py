@@ -110,5 +110,5 @@ def prepare_loader_from_json(json_path, task_id=None, batch_size=8, img_size=336
         data = data_dict[task_key]['train'] if train else data_dict[task_key]['test']
 
     dataset = JSONDataset(data, img_size=img_size, crp_size=img_size, msk_size=msk_size, train=train)
-    loader = DataLoader(dataset, batch_size=batch_size, shuffle=train, num_workers=4, pin_memory=True)
+    loader = DataLoader(dataset, batch_size=batch_size, shuffle=train, num_workers=2, pin_memory=True)
     return loader

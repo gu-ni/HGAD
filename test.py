@@ -1,14 +1,17 @@
+import os
 import argparse
 import re
 import numpy as np
 from sklearn.metrics import roc_auc_score, average_precision_score
 from tqdm import tqdm
+import pandas as pd
 
 import torch
 import torch
 import torch.nn.functional as F
 
 from models.model import HGAD
+from models.utils import load_model
 import models.nf_model as nfs
 from datasets.json_loader import prepare_loader_from_json
 
@@ -38,11 +41,11 @@ def parse_args():
                         help='number of intra-class centers (default: 10)')
     
     # Data configures
-    parser.add_argument('--img_size', default=1024, type=int, 
+    parser.add_argument('--img_size', default=336, type=int, 
                         help='image size (default: 1024)')
-    parser.add_argument('--msk_size', default=256, type=int, 
+    parser.add_argument('--msk_size', default=336, type=int, 
                         help='mask size (default: 256)')
-    parser.add_argument('--batch_size', default=4, type=int, 
+    parser.add_argument('--batch_size', default=8, type=int, 
                         help='train batch size (default: 32)')
     
     # training configures
@@ -69,6 +72,8 @@ def parse_args():
     parser.add_argument('--base_json', default='base_classes', type=str,)
     parser.add_argument('--task_json', default='5classes_tasks', type=str,)
     parser.add_argument('--phase', default='base', type=str, choices=['base', 'continual'],)
+    parser.add_argument('--pretrained_path', default='outputs/HGAD_base_img.pt', type=str,)
+    parser.add_argument('--scores_dir', default='scores', type=str,)
 
 
     args = parser.parse_args()
@@ -246,6 +251,7 @@ def evaluate_model_on_dataset(model, dataloader, device):
         Dictionary with AUROC and AP scores
     """
     model.to(device).eval()
+    l = len(dataloader)
     
     image_scores = []
     pixel_maps = []
@@ -254,7 +260,7 @@ def evaluate_model_on_dataset(model, dataloader, device):
 
     normal_count = 0
     anomaly_count = 0
-    MAX_PER_CLASS = 1
+    MAX_PER_CLASS = np.inf
     for i, (image, label, mask, anomaly) in tqdm(enumerate(dataloader)):
         B = image.shape[0]
         image = image.to(device)
@@ -301,7 +307,13 @@ def evaluate_model_on_dataset(model, dataloader, device):
                 # Break early if 조건을 만족했으면
                 if normal_count >= MAX_PER_CLASS and anomaly_count >= MAX_PER_CLASS:
                     break
-    
+        print("\ndataloader idx:", i)
+        print("normal_count:", normal_count)
+        print("anomaly_count:", anomaly_count)
+        print("total dataset size:", l)
+        print("completed ratio:", i / l)
+        print()
+        
         if normal_count >= MAX_PER_CLASS and anomaly_count >= MAX_PER_CLASS:
             break
 
@@ -317,6 +329,11 @@ def evaluate_model_on_dataset(model, dataloader, device):
 
     # Compute AUROC, AP
     results = compute_anomaly_metrics(gt_labels, image_scores, gt_masks, pixel_maps)
+    results["normal_count"] = normal_count
+    results["anomaly_count"] = anomaly_count
+    results["num_classes"] = model.n_classes
+    results["num_samples"] = len(gt_labels)
+    
     
     return results
     
@@ -336,11 +353,25 @@ if __name__ == '__main__':
     visualization_dir = "./visualizations"
     
     model = HGAD(args)
+    load_model(args.pretrained_path, model)
     model.eval()
     
-    test_loader = prepare_loader_from_json(args.base_json, task_id=None,
+    if args.phase == "base":
+        test_loader = prepare_loader_from_json(args.base_json, task_id=None,
+                                        batch_size=args.batch_size,
+                                        img_size=args.img_size, msk_size=args.img_size, train=False)
+    elif args.phase == "continual":
+        test_loader = prepare_loader_from_json(args.task_json, task_id=None,
                                         batch_size=args.batch_size,
                                         img_size=args.img_size, msk_size=args.img_size, train=False)
     with torch.no_grad():
-       results = evaluate_model_on_dataset(model, test_loader, args.device)
-       print(results)
+        results = evaluate_model_on_dataset(model, test_loader, args.device)
+        
+        os.makedirs(args.scores_dir, exist_ok=True)
+        df = pd.DataFrame([results])
+        if args.phase == "base":
+            df_name = os.path.join(args.scores_dir, f"{args.phase}_{args.base_json}.csv")
+        else:
+            df_name = os.path.join(args.scores_dir, f"{args.phase}_{args.task_json}.csv")
+        df.to_csv(df_name, index=False)
+        print(results)
