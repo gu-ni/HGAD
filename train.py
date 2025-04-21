@@ -24,23 +24,18 @@ from datasets.json_loader import prepare_loader_from_json
 
 
 def train(args):
-    if args.phase == 'base':
-        if args.base_json == "base_classes":
-            num_classes = 85
-        else:
-            num_classes = 58
-    elif args.phase == 'continual':
-        num_classes = int(re.match(r'\d+', args.task_json_name).group())
-    
-    args.n_classes = num_classes
+    args.n_classes = args.num_classes_per_task
     
     model = HGAD(args)
+    if args.phase == "continual":
+        args.pretrained_path = f"./outputs/{args.scenario}/base/HGAD_base_img.pt"
+        load_model(args.pretrained_path, model)
     model.to(args.device)
     
-    if args.phase == 'base':
+    if args.phase == "base":
         
         print("Starting base training...")
-        train_loader = prepare_loader_from_json(args.base_json, task_id=None,
+        train_loader = prepare_loader_from_json(args.json_path, task_id=None,
                                                     batch_size=args.batch_size,
                                                     img_size=args.img_size, msk_size=args.img_size, train=True)
         
@@ -63,7 +58,7 @@ def train(args):
                     
                     label_r = label.view(-1, 1, 1).repeat([1, h, w])
                     
-                    label_onehot = onehot(label_r.reshape(-1), num_classes, args.label_smoothing)
+                    label_onehot = onehot(label_r.reshape(-1), args.num_classes_per_task, args.label_smoothing)
                     
                     # (bs, 128, h, w)
                     pos_embed = nfs.positionalencoding2d(args.pos_embed_dim, h, w).to(args.device).unsqueeze(0).repeat(bs, 1, 1, 1)
@@ -89,20 +84,13 @@ def train(args):
         print(f'[Base] Training complete. Model saved.')
     
     elif args.phase == 'continual':
-        print("Starting continual learning...")
-        load_model(args.pretrained_path, model)
+        print("Starting continual learning...")        
         
-        
-        if "except_continual_ad" in args.task_json_name:
-            num_all_tasks = 30
-        else:
-            num_all_tasks = 60
-        num_tasks = num_all_tasks // num_classes
         optimizer = model.optimizer
 
-        for task_id in range(1, num_tasks + 1):
+        for task_id in range(1, args.num_tasks + 1):
             print(f'[Task {task_id}] Loading task data...')
-            train_loader = prepare_loader_from_json(args.task_json_name, task_id=task_id,
+            train_loader = prepare_loader_from_json(args.json_path, task_id=task_id,
                                                     batch_size=args.batch_size,
                                                     img_size=args.img_size, msk_size=args.img_size, train=True)
             
@@ -119,7 +107,7 @@ def train(args):
                         e = e.permute(0, 2, 3, 1).reshape(-1, dim)
 
                         label_r = label.view(-1, 1, 1).repeat([1, h, w])
-                        label_onehot = onehot(label_r.reshape(-1), num_classes, args.label_smoothing)
+                        label_onehot = onehot(label_r.reshape(-1), args.num_classes_per_task, args.label_smoothing)
 
                         pos_embed = nfs.positionalencoding2d(args.pos_embed_dim, h, w).to(args.device).unsqueeze(0).repeat(bs, 1, 1, 1)
                         pos_embed = pos_embed.permute(0, 2, 3, 1).reshape(-1, args.pos_embed_dim)
@@ -137,7 +125,7 @@ def train(args):
 
                 print(f'[Task {task_id}] Epoch {epoch+1}/{args.meta_epochs} done.')
 
-            save_model(args.output_dir, model, task_id, f'task{task_id}', flag='img')
+            save_model(args.output_dir, model, args.meta_epochs, f'task{task_id}', flag='img')
             print(f'[Task {task_id}] Finished and model saved.')
 
     else:

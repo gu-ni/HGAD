@@ -1,3 +1,4 @@
+import re
 import argparse
 import warnings
 
@@ -70,29 +71,40 @@ def parse_args():
     parser.add_argument('--output_dir', default='./outputs', type=str, 
                         help='directory to save model weights')
     
+    parser.add_argument('--phase', default='base', type=str,)
     parser.add_argument('--json_path', default='base_classes', type=str,)
-    parser.add_argument('--pretrained_path', type=str, default='outputs/HGAD_base_img.pt')
-
+    
     
     args = parser.parse_args()
     
-    # base training
-    if args.json_path.startswith("base"):
-        if args.json_path.endswith("classes"):
-            scenario = "scenario_1"
-        elif args.json_path.endswith("except_mvtec_visa"):
-            scenario = "scenario_2"
-        elif args.json_path.endswith("except_continual_ad"):
-            scenario = "scenario_3"
-        else:
-            raise ValueError("Invalid json_path for base training.")
-    # continual training
+    if args.json_path.endswith("except_mvtec_visa"):
+        scenario = "scenario_2"
+    elif args.json_path.endswith("except_continual_ad"):
+        scenario = "scenario_3"
     else:
-        if args.json_path.startswith("5classes"):
-            scenario = "scenario_4"
-            
-    args.output_dir = f"./outputs/{scenario}/5classes"
+        scenario = "scenario_1"
+    args.scenario = scenario
     
+    
+    if args.phase == "base":
+        args.output_dir = f"./outputs/{scenario}/base"
+        if args.json_path == "base_classes":
+            num_classes_per_task = 85
+        else:
+            num_classes_per_task = 58
+        args.num_classes_per_task = num_classes_per_task
+        
+    elif args.phase == "continual":
+        num_classes_per_task = int(re.match(r'\d+', args.json_path).group())
+        args.num_classes_per_task = num_classes_per_task
+        args.output_dir = f"./outputs/{scenario}/{num_classes_per_task}classes_tasks"
+        
+        if "except_continual_ad" in args.json_path:
+            num_all_tasks = 30
+        else:
+            num_all_tasks = 60
+        args.num_all_tasks = num_all_tasks
+        args.num_tasks = num_all_tasks // num_classes_per_task
     return args
     
     
