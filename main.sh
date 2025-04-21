@@ -9,36 +9,34 @@ PHASE=$1
 # 공통 인자
 IMG_SIZE=336
 BATCH_SIZE=16
+NUM_WORKERS=8
 SEED=42
-OUTPUT_DIR="./outputs/scenario_1/5classes"
-JSON_PATH="base_classes"
-PRETRAINED_PATH="${OUTPUT_DIR}/HGAD_base_img.pt"
+JSON_PATH="5classes_tasks"
 
 # 실행 분기
 if [ "$PHASE" = "base" ]; then
-    echo "[BASE PHASE] 시작"
+    echo "Start [BASE PHASE]"
     python main.py \
         --phase base \
         --meta_epochs 50 \
         --gpu 0 \
         --img_size $IMG_SIZE \
         --batch_size $BATCH_SIZE \
+        --num_workers $NUM_WORKERS \
         --seed $SEED \
-        --output_dir $OUTPUT_DIR \
         --json_path $JSON_PATH
 
 elif [ "$PHASE" = "continual" ]; then
-    echo "[CONTINUAL PHASE] 시작"
+    echo "Start [CONTINUAL PHASE]"
     python main.py \
         --phase continual \
-         --meta_epochs 20 \
+        --meta_epochs 20 \
         --gpu 0 \
         --img_size $IMG_SIZE \
         --batch_size $BATCH_SIZE \
+        --num_workers $NUM_WORKERS \
         --seed $SEED \
-        --output_dir $OUTPUT_DIR \
-        --json_path $JSON_PATH \
-        --pretrained_path $PRETRAINED_PATH
+        --json_path $JSON_PATH
 
 else
     echo "에러: 유효하지 않은 phase입니다. 'base' 또는 'continual' 중 하나를 선택하세요."

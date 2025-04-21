@@ -1,3 +1,5 @@
+import os
+import json
 import re
 import argparse
 import warnings
@@ -40,6 +42,7 @@ def parse_args():
                         help='mask size (default: 256)')
     parser.add_argument('--batch_size', default=8, type=int, 
                         help='train batch size (default: 32)')
+    parser.add_argument('--num_workers', default=8, type=int,)
     
     # training configures
     parser.add_argument('--lr', type=float, default=2e-4, 
@@ -83,11 +86,9 @@ def parse_args():
         scenario = "scenario_3"
     else:
         scenario = "scenario_1"
-    args.scenario = scenario
-    
     
     if args.phase == "base":
-        args.output_dir = f"./outputs/{scenario}/base"
+        args.output_dir = f"/workspace/MegaInspection/HGAD/outputs/{scenario}/base"
         if args.json_path == "base_classes":
             num_classes_per_task = 85
         else:
@@ -97,7 +98,7 @@ def parse_args():
     elif args.phase == "continual":
         num_classes_per_task = int(re.match(r'\d+', args.json_path).group())
         args.num_classes_per_task = num_classes_per_task
-        args.output_dir = f"./outputs/{scenario}/{num_classes_per_task}classes_tasks"
+        args.output_dir = f"/workspace/MegaInspection/HGAD/outputs/{scenario}/{num_classes_per_task}classes_tasks"
         
         if "except_continual_ad" in args.json_path:
             num_all_tasks = 30
@@ -105,6 +106,12 @@ def parse_args():
             num_all_tasks = 60
         args.num_all_tasks = num_all_tasks
         args.num_tasks = num_all_tasks // num_classes_per_task
+        args.pretrained_path = f"/workspace/MegaInspection/HGAD/outputs/{scenario}/base/HGAD_base_img.pt"
+
+    print(f"[INFO] Phase: {args.phase}, Scenario: {scenario}")
+    print(f"[INFO] Output dir: {args.output_dir}")
+    print(f"[INFO] JSON path: {args.json_path}")
+    
     return args
     
     

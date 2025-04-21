@@ -47,6 +47,7 @@ def parse_args():
                         help='mask size (default: 256)')
     parser.add_argument('--batch_size', default=8, type=int, 
                         help='train batch size (default: 32)')
+    parser.add_argument('--num_workers', default=8, type=int,)
     
     # training configures
     parser.add_argument('--lr', type=float, default=2e-4, 
@@ -359,11 +360,13 @@ if __name__ == '__main__':
     if args.phase == "base":
         test_loader = prepare_loader_from_json(args.base_json, task_id=None,
                                         batch_size=args.batch_size,
-                                        img_size=args.img_size, msk_size=args.img_size, train=False)
+                                        img_size=args.img_size, msk_size=args.img_size, 
+                                        num_workers=args.num_workers, train=False)
     elif args.phase == "continual":
         test_loader = prepare_loader_from_json(args.task_json, task_id=None,
                                         batch_size=args.batch_size,
-                                        img_size=args.img_size, msk_size=args.img_size, train=False)
+                                        img_size=args.img_size, msk_size=args.img_size, 
+                                        num_workers=args.num_workers, train=False)
     with torch.no_grad():
         results = evaluate_model_on_dataset(model, test_loader, args.device)
         

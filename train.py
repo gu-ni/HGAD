@@ -1,3 +1,5 @@
+import os
+import json
 import argparse
 from typing import List
 from tqdm import tqdm
@@ -12,7 +14,7 @@ from torch.utils.data import DataLoader
 
 import models.nf_model as nfs
 from models.model import HGAD
-from models.utils import save_model, load_model
+from models.utils import save_model, load_model, load_model_partial
 from datasets.mvtec import MVTEC, MVTEC_CLASS_NAMES
 from datasets.btad import BTAD, BTAD_CLASS_NAMES
 from datasets.mvtec_3d import MVTEC3D, MVTEC3D_CLASS_NAMES
@@ -23,21 +25,30 @@ from utils import adjust_learning_rate, warmup_learning_rate, onehot
 from datasets.json_loader import prepare_loader_from_json
 
 
+def load_class_mapping_and_set_n_classes(class_mapping_path):
+        if not os.path.exists(class_mapping_path):
+            raise FileNotFoundError(f"[ERROR] Class mapping file not found: {class_mapping_path}")
+        
+        with open(class_mapping_path, 'r') as f:
+            class_to_idx = json.load(f)
+
+        return len(class_to_idx)
+
+
 def train(args):
-    args.n_classes = args.num_classes_per_task
-    
-    model = HGAD(args)
-    if args.phase == "continual":
-        args.pretrained_path = f"./outputs/{args.scenario}/base/HGAD_base_img.pt"
-        load_model(args.pretrained_path, model)
-    model.to(args.device)
     
     if args.phase == "base":
+        args.n_classes = args.num_classes_per_task
+        model = HGAD(args)
+        model.to(args.device)
         
         print("Starting base training...")
         train_loader = prepare_loader_from_json(args.json_path, task_id=None,
                                                     batch_size=args.batch_size,
-                                                    img_size=args.img_size, msk_size=args.img_size, train=True)
+                                                    img_size=args.img_size, msk_size=args.img_size, 
+                                                    num_workers=args.num_workers, train=True,
+                                                    output_dir=args.output_dir,
+                                                    save_class_mapping=True)
         
         optimizer = model.optimizer
         for epoch in range(args.meta_epochs):
@@ -84,15 +95,38 @@ def train(args):
         print(f'[Base] Training complete. Model saved.')
     
     elif args.phase == 'continual':
-        print("Starting continual learning...")        
+        print("Starting continual learning...")  
         
-        optimizer = model.optimizer
 
         for task_id in range(1, args.num_tasks + 1):
+            
             print(f'[Task {task_id}] Loading task data...')
             train_loader = prepare_loader_from_json(args.json_path, task_id=task_id,
                                                     batch_size=args.batch_size,
-                                                    img_size=args.img_size, msk_size=args.img_size, train=True)
+                                                    img_size=args.img_size, msk_size=args.img_size, 
+                                                    num_workers=args.num_workers, train=True,
+                                                    output_dir=args.output_dir,
+                                                    save_class_mapping=True)
+            
+            
+            class_mapping_path = os.path.join(args.output_dir, f"class_mapping_task_{task_id}.json")
+
+            num_all_classes = load_class_mapping_and_set_n_classes(class_mapping_path)
+            print(f"[INFO] Loaded class_to_idx with {args.n_classes} classes from {class_mapping_path}")
+            
+            args.n_classes = args.num_classes_per_task
+            model = HGAD(args)
+            load_model_partial(
+                path=args.pretrained_path,
+                model=model,
+                curr_num_classes=num_all_classes,
+            )
+            model.to(args.device)
+            
+            optimizer = model.optimizer
+            
+            
+            
             
             for epoch in range(args.meta_epochs):
                 model.train()
