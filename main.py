@@ -74,18 +74,24 @@ def parse_args():
     parser.add_argument('--output_dir', default='./outputs', type=str, 
                         help='directory to save model weights')
     
-    parser.add_argument('--phase', default='base', type=str,)
     parser.add_argument('--json_path', default='base_classes', type=str,)
+    parser.add_argument('--task_id', type=int, default=0, help='task id (0 for base, >=1 for continual)')
     
     
     args = parser.parse_args()
     
+    if args.task_id == 0:
+        args.phase = "base"
+    else:
+        args.phase = "continual"
+
     if args.json_path.endswith("except_mvtec_visa"):
         scenario = "scenario_2"
     elif args.json_path.endswith("except_continual_ad"):
         scenario = "scenario_3"
     else:
         scenario = "scenario_1"
+    args.scenario = scenario
     
     if args.phase == "base":
         args.output_dir = f"/workspace/MegaInspection/HGAD/outputs/{scenario}/base"
