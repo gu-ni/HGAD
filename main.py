@@ -95,28 +95,22 @@ def parse_args():
     
     if args.phase == "base":
         args.output_dir = f"/workspace/MegaInspection/HGAD/outputs/{scenario}/base"
-        if args.json_path == "base_classes":
-            num_classes_per_task = 85
+        if args.scenario == "scenario_1":
+            n_classes = 85
         else:
-            num_classes_per_task = 58
-        args.num_classes_per_task = num_classes_per_task
+            n_classes = 58
+        args.n_classes = n_classes
         
     elif args.phase == "continual":
         num_classes_per_task = int(re.match(r'\d+', args.json_path).group())
-        args.num_classes_per_task = num_classes_per_task
         args.output_dir = f"/workspace/MegaInspection/HGAD/outputs/{scenario}/{num_classes_per_task}classes_tasks"
         
-        if "except_continual_ad" in args.json_path:
-            num_all_tasks = 30
-        else:
-            num_all_tasks = 60
-        args.num_all_tasks = num_all_tasks
-        args.num_tasks = num_all_tasks // num_classes_per_task
         args.pretrained_path = f"/workspace/MegaInspection/HGAD/outputs/{scenario}/base/HGAD_base_img.pt"
 
     print(f"[INFO] Phase: {args.phase}, Scenario: {scenario}")
     print(f"[INFO] Output dir: {args.output_dir}")
     print(f"[INFO] JSON path: {args.json_path}")
+    print()
     
     return args
     

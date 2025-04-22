@@ -40,18 +40,18 @@ class JSONDataset(Dataset):
         for cls_name, samples in json_data.items():
             for sample in samples:
                 self.num_all_samples += 1
+                img_path = self.resolve_path(sample["img_path"])
+                anomaly = sample.get("anomaly", 0)
+
                 if train:
-                    if not sample["mask_path"]:
-                        img_path = self.resolve_path(sample["img_path"])
-                        self.samples.append((img_path, cls_name, None, None))
+                    if anomaly != 0:
+                        continue  # ⛔ skip abnormal sample during training
+                    mask_path = ""  # not used
                 else:
-                    img_path = self.resolve_path(sample["img_path"])
-                    if sample["mask_path"]:
-                        mask_path = self.resolve_path(sample["mask_path"])
-                    else:
-                        mask_path = None
-                    anomaly = sample["anomaly"]
-                    self.samples.append((img_path, cls_name, mask_path, anomaly))
+                    mask_path = self.resolve_path(sample["mask_path"]) if sample.get("mask_path") else ""
+
+                self.samples.append((img_path, cls_name, mask_path, anomaly))
+                
         self.data = json_data
         self.train = train
         self.masksize = msk_size

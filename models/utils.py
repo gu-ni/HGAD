@@ -33,6 +33,10 @@ def load_model_partial(path, model, curr_num_classes):
     # === 자동으로 prev_num_classes 추론 ===
     example_key = next(iter(state_dict['phi_inters']))
     prev_num_classes = state_dict['phi_inters'][example_key].shape[0]
+    
+    if curr_num_classes < prev_num_classes:
+        raise ValueError(f"[ERROR] curr_num_classes ({curr_num_classes}) < prev_num_classes ({prev_num_classes})")
+    
     print(f"Detected previous class count: {prev_num_classes}")
 
     # === Normalizing Flows는 그대로 로드
@@ -40,29 +44,41 @@ def load_model_partial(path, model, curr_num_classes):
         nf.load_state_dict(state, strict=False)
 
     # === phi_inters와 phi_intras 확장
-    def expand_paramlist(plist_key):
+    def expand_paramlist(plist_key, shape_type="vector"):
         orig_params_dict = state_dict[plist_key]
         new_list = nn.ParameterList()
         for i in range(len(orig_params_dict)):
             orig = orig_params_dict[str(i)]
-            new_param = nn.Parameter(torch.zeros(curr_num_classes))
-            new_param.data[:prev_num_classes] = orig[:prev_num_classes]
+
+            if shape_type == "vector":
+                new_param = nn.Parameter(torch.zeros(curr_num_classes, device=orig.device))
+                new_param.data[:prev_num_classes] = orig[:prev_num_classes]
+
+            elif shape_type == "matrix":
+                # shape: (n_classes, n_centers)
+                new_param = nn.Parameter(torch.zeros(curr_num_classes, orig.shape[1], device=orig.device))
+                new_param.data[:prev_num_classes] = orig[:prev_num_classes]
+
+            else:
+                raise ValueError("Unsupported shape_type for expand_paramlist")
+
             new_list.append(new_param)
         return new_list
 
-    model.phi_inters = expand_paramlist('phi_inters')
-    model.phi_intras = expand_paramlist('phi_intras')
+    model.phi_inters = expand_paramlist('phi_inters', shape_type="vector")
+    model.phi_intras = expand_paramlist('phi_intras', shape_type="matrix")
+
 
     # === mus
     for i in range(len(model.mus)):
-        old_mu = state_dict['mus'][i]  # (prev_cls, dim)
+        old_mu = state_dict['mus'][str(i)]
         new_mu = torch.zeros((curr_num_classes, old_mu.shape[1]), device=old_mu.device)
         new_mu[:prev_num_classes] = old_mu[:prev_num_classes]
         model.mus[i] = nn.Parameter(new_mu)
 
     # === mu_deltas
     for i in range(len(model.mu_deltas)):
-        old_d = state_dict['mu_deltas'][i]
+        old_d = state_dict['mu_deltas'][str(i)]
         new_d = torch.zeros((curr_num_classes, old_d.shape[1], old_d.shape[2]), device=old_d.device)
         new_d[:prev_num_classes] = old_d[:prev_num_classes]
         model.mu_deltas[i] = nn.Parameter(new_d)

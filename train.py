@@ -38,7 +38,6 @@ def load_class_mapping_and_set_n_classes(class_mapping_path):
 def train(args):
     
     if args.phase == "base":
-        args.n_classes = args.num_classes_per_task
         model = HGAD(args)
         model.to(args.device)
         
@@ -54,7 +53,7 @@ def train(args):
         for epoch in range(args.meta_epochs):
             model.train()
             
-            for idx, (image, label) in enumerate(train_loader):
+            for idx, (image, label, *_) in enumerate(train_loader):
             
                 # x: (N, 3, 256, 256) y: (N, )
                 image, label = image.to(args.device), label.to(args.device)  # (N, num_classes)
@@ -69,7 +68,7 @@ def train(args):
                     
                     label_r = label.view(-1, 1, 1).repeat([1, h, w])
                     
-                    label_onehot = onehot(label_r.reshape(-1), args.num_classes_per_task, args.label_smoothing)
+                    label_onehot = onehot(label_r.reshape(-1), args.n_classes, args.label_smoothing)
                     
                     # (bs, 128, h, w)
                     pos_embed = nfs.positionalencoding2d(args.pos_embed_dim, h, w).to(args.device).unsqueeze(0).repeat(bs, 1, 1, 1)
@@ -95,7 +94,7 @@ def train(args):
         print(f'[Base] Training complete. Model saved.')
     
     elif args.phase == 'continual':
-        print("Starting continual learning...")  
+        print(f'[Task {args.task_id}] Loading task data...')
         # 1. 이전까지 학습된 클래스 매핑 경로
         if args.task_id == 1:
             prev_class_mapping_path = os.path.join(os.path.dirname(args.output_dir), "base", "class_mapping_base.json")
@@ -129,39 +128,7 @@ def train(args):
         )
         load_model_partial(pretrained_path, model, curr_num_classes=args.n_classes)
         model.to(args.device)
-            
-            
-
-
-
-        
-        print(f'[Task {args.task_id}] Loading task data...')
-        train_loader = prepare_loader_from_json(args.json_path, task_id=args.task_id,
-                                                batch_size=args.batch_size,
-                                                img_size=args.img_size, msk_size=args.img_size, 
-                                                num_workers=args.num_workers, train=True,
-                                                output_dir=args.output_dir,
-                                                save_class_mapping=True)
-        
-        
-        class_mapping_path = os.path.join(args.output_dir, f"class_mapping_task_{args.task_id}.json")
-
-        num_all_classes = load_class_mapping_and_set_n_classes(class_mapping_path)
-        print(f"[INFO] Loaded class_to_idx with {args.n_classes} classes from {class_mapping_path}")
-        
-        args.n_classes = args.num_classes_per_task
-        model = HGAD(args)
-        load_model_partial(
-            path=args.pretrained_path,
-            model=model,
-            curr_num_classes=num_all_classes,
-        )
-        model.to(args.device)
-        
         optimizer = model.optimizer
-        
-        
-        
         
         for epoch in range(args.meta_epochs):
             model.train()
@@ -176,7 +143,7 @@ def train(args):
                     e = e.permute(0, 2, 3, 1).reshape(-1, dim)
 
                     label_r = label.view(-1, 1, 1).repeat([1, h, w])
-                    label_onehot = onehot(label_r.reshape(-1), args.num_classes_per_task, args.label_smoothing)
+                    label_onehot = onehot(label_r.reshape(-1), args.n_classes, args.label_smoothing)
 
                     pos_embed = nfs.positionalencoding2d(args.pos_embed_dim, h, w).to(args.device).unsqueeze(0).repeat(bs, 1, 1, 1)
                     pos_embed = pos_embed.permute(0, 2, 3, 1).reshape(-1, args.pos_embed_dim)
@@ -196,6 +163,7 @@ def train(args):
 
         save_model(args.output_dir, model, args.meta_epochs, f'task{args.task_id}', flag='img')
         print(f'[Task {args.task_id}] Finished and model saved.')
+        print()
 
     else:
         raise ValueError("Unknown phase. Choose 'base' or 'continual'.")
