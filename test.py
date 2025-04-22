@@ -5,15 +5,18 @@ import numpy as np
 from sklearn.metrics import roc_auc_score, average_precision_score
 from tqdm import tqdm
 import pandas as pd
+import json
 
 import torch
 import torch
 import torch.nn.functional as F
+import gc
 
 from models.model import HGAD
 from models.utils import load_model
 import models.nf_model as nfs
-from datasets.json_loader import prepare_loader_from_json
+from datasets.json_loader import prepare_loader_from_json, prepare_loader_from_json_by_chunk
+from train import load_class_mapping_length
 
 def parse_args():
     parser = argparse.ArgumentParser('HGAD: Hierarchical Gaussian Mixture Normalizing Flow Modeling for Unified Anomaly Detection')
@@ -70,12 +73,11 @@ def parse_args():
                         help='number of sub epochs to train (default: 8)')
     
     parser.add_argument('--device', default='cuda', type=str,)
-    parser.add_argument('--base_json', default='base_classes', type=str,)
-    parser.add_argument('--task_json', default='5classes_tasks', type=str,)
-    parser.add_argument('--phase', default='base', type=str, choices=['base', 'continual'],)
-    parser.add_argument('--pretrained_path', default='outputs/HGAD_base_img.pt', type=str,)
-    parser.add_argument('--scores_dir', default='scores', type=str,)
-
+    parser.add_argument('--json_path', default='base_classes', type=str,)
+    parser.add_argument('--task_id', default=0, type=int,)
+    parser.add_argument('--score_dir', default='/workspace/MegaInspection/HGAD/scores', type=str,)
+    parser.add_argument('--chunk_size', default=1000, type=int,)
+    parser.add_argument('--start_idx', default=0, type=int,)
 
     args = parser.parse_args()
     
@@ -228,13 +230,15 @@ def compute_anomaly_metrics(gt_labels, pred_scores, gt_masks, pred_maps):
     gt_masks_flat = gt_masks.flatten()
     pred_maps_flat = pred_maps.flatten()
 
+    print("\nStart computing metrics...")
     image_auroc = roc_auc_score(gt_labels, pred_scores.reshape(-1, 1))
-    pixel_auroc = roc_auc_score(gt_masks_flat, pred_maps_flat)
+    # pixel_auroc = roc_auc_score(gt_masks_flat, pred_maps_flat)
     pixel_ap = average_precision_score(gt_masks_flat, pred_maps_flat)
+    print("End computing metrics!\n")
 
     return {
         'image_auroc': image_auroc,
-        'pixel_auroc': pixel_auroc,
+        # 'pixel_auroc': pixel_auroc,
         'pixel_ap': pixel_ap
     }
 
@@ -252,7 +256,6 @@ def evaluate_model_on_dataset(model, dataloader, device):
         Dictionary with AUROC and AP scores
     """
     model.to(device).eval()
-    l = len(dataloader)
     
     image_scores = []
     pixel_maps = []
@@ -261,18 +264,12 @@ def evaluate_model_on_dataset(model, dataloader, device):
 
     normal_count = 0
     anomaly_count = 0
-    MAX_PER_CLASS = np.inf
     for i, (image, label, mask, anomaly) in tqdm(enumerate(dataloader)):
         B = image.shape[0]
         image = image.to(device)
         label = label.to(device)
 
         if B == 1:
-            if int(anomaly.item()) == 0 and normal_count >= MAX_PER_CLASS:
-                continue
-            if int(anomaly.item()) == 1 and anomaly_count >= MAX_PER_CLASS:
-                continue
-
             if int(anomaly.item()) == 0:
                 normal_count += 1
             else:
@@ -283,17 +280,12 @@ def evaluate_model_on_dataset(model, dataloader, device):
             # Save results
             image_scores.append(image_score)                       # scalar
             pixel_maps.append(anomaly_map.cpu().numpy())           # (H, W)
-            gt_labels.append(anomaly)                              # label: 0 (정상), 1 (이상)
+            gt_labels.append(int(anomaly.item()))                              # label: 0 (정상), 1 (이상)
             gt_masks.append(mask.squeeze().cpu().numpy())          # (H, W)
         else:
             anomaly_maps, image_scores_batch = model_anomaly_score_batch(model, image, label)
             for j in range(B):
                 a = int(anomaly[j].item())
-                if a == 0 and normal_count >= MAX_PER_CLASS:
-                    continue
-                if a == 1 and anomaly_count >= MAX_PER_CLASS:
-                    continue
-
                 if a == 0:
                     normal_count += 1
                 else:
@@ -304,20 +296,7 @@ def evaluate_model_on_dataset(model, dataloader, device):
                 pixel_maps.append(anomaly_maps[j].cpu().numpy())
                 gt_labels.append(a)
                 gt_masks.append(mask[j].squeeze().cpu().numpy())
-
-                # Break early if 조건을 만족했으면
-                if normal_count >= MAX_PER_CLASS and anomaly_count >= MAX_PER_CLASS:
-                    break
-        print("\ndataloader idx:", i)
-        print("normal_count:", normal_count)
-        print("anomaly_count:", anomaly_count)
-        print("total dataset size:", l)
-        print("completed ratio:", i / l)
-        print()
         
-        if normal_count >= MAX_PER_CLASS and anomaly_count >= MAX_PER_CLASS:
-            break
-
     # Convert to numpy arrays
     image_scores = np.array(image_scores)                     # (N,)
     pixel_maps = np.stack(pixel_maps, axis=0)                 # (N, H, W)
@@ -332,9 +311,6 @@ def evaluate_model_on_dataset(model, dataloader, device):
     results = compute_anomaly_metrics(gt_labels, image_scores, gt_masks, pixel_maps)
     results["normal_count"] = normal_count
     results["anomaly_count"] = anomaly_count
-    results["num_classes"] = model.n_classes
-    results["num_samples"] = len(gt_labels)
-    
     
     return results
     
@@ -342,39 +318,111 @@ def evaluate_model_on_dataset(model, dataloader, device):
 if __name__ == '__main__':
     args = parse_args()
     
-    if args.phase == 'base':
-        if args.base_json == "base_classes":
-            num_classes = 85
-        else:
-            num_classes = 58
-    elif args.phase == 'continual':
-        num_classes = int(re.match(r'\d+', args.task_json_name).group())
+    model_weight_path = "/workspace/MegaInspection/HGAD/outputs"
     
-    args.n_classes = num_classes
-    visualization_dir = "./visualizations"
+    if args.task_id == 0:
+        args.phase = "base"
+    else:
+        args.phase = "continual"
+
+    if args.json_path.endswith("except_mvtec_visa"):
+        scenario = "scenario_2"
+    elif args.json_path.endswith("except_continual_ad"):
+        scenario = "scenario_3"
+    else:
+        scenario = "scenario_1"
+    args.scenario = scenario
+    
+    if args.phase == 'base':
+        class_mapping_json_path = os.path.join(model_weight_path, 
+                                               scenario, 
+                                               "base", 
+                                               f"class_mapping_base.json")
+        args.n_classes = load_class_mapping_length(class_mapping_json_path)
+        pretrained_path = os.path.join(model_weight_path, 
+                                            scenario, 
+                                            "base", 
+                                            "HGAD_base_img.pt")
+        final_score_path = os.path.join(args.score_dir,
+                                        scenario, 
+                                        "base", 
+                                        f"base_score.json")
+        
+    elif args.phase == 'continual':
+        # TODO: args.task_id를 FM 계산 세팅에 맞춰야 함
+        num_classes_per_task = int(re.match(r'\d+', args.json_path).group())
+        class_mapping_json_path = os.path.join(model_weight_path, 
+                                               scenario, 
+                                               f"{num_classes_per_task}classes_tasks", 
+                                               f"class_mapping_task_{args.task_id}.json")
+        args.n_classes = load_class_mapping_length(class_mapping_json_path)
+        pretrained_path = os.path.join(model_weight_path, 
+                                            scenario, 
+                                            f"{num_classes_per_task}classes_tasks", 
+                                            f"HGAD_task{args.task_id}_img.pt")
+        final_score_path = os.path.join(args.score_dir,
+                                        scenario, 
+                                        f"{num_classes_per_task}classes_tasks", 
+                                        f"base_score.json")
+    
+    os.makedirs(os.path.dirname(final_score_path), exist_ok=True)
     
     model = HGAD(args)
-    load_model(args.pretrained_path, model)
-    model.eval()
+    load_model(pretrained_path, model)
     
-    if args.phase == "base":
-        test_loader = prepare_loader_from_json(args.base_json, task_id=None,
+    
+    
+    json_path = os.path.join("/workspace/meta_files", f"{args.json_path}.json")
+    with open(json_path, 'r') as f:
+        data_dict = json.load(f)
+    if args.task_id is None or args.task_id == 0:
+        data_dict = data_dict['test']
+    else:
+        task_key = f'task_{args.task_id}'
+        data_dict = data_dict[task_key]['test']
+    
+    len_data_dict = len(data_dict)
+    
+    all_samples = []
+    num_all_samples = 0
+    for cls_name, samples in data_dict.items():
+        for sample in samples:
+            num_all_samples += 1
+            all_samples.append((cls_name, sample))
+    
+    for n in range(args.start_idx, num_all_samples, args.chunk_size):
+        print(f"\nTotal number of samples: {num_all_samples}")
+        print(f"\nProcessing chunk {n} to {n + args.chunk_size}")
+        print(f"Processing chunk {n} to {n + args.chunk_size}\n")
+        chunk_samples = all_samples[n:n + args.chunk_size]
+        sub_data_dict = {}
+        for cls_name, sample in chunk_samples:
+            if cls_name not in sub_data_dict:
+                sub_data_dict[cls_name] = []
+            sub_data_dict[cls_name].append(sample)
+            
+        test_loader = prepare_loader_from_json_by_chunk(sub_data_dict,
                                         batch_size=args.batch_size,
                                         img_size=args.img_size, msk_size=args.img_size, 
-                                        num_workers=args.num_workers, train=False)
-    elif args.phase == "continual":
-        test_loader = prepare_loader_from_json(args.task_json, task_id=None,
-                                        batch_size=args.batch_size,
-                                        img_size=args.img_size, msk_size=args.img_size, 
-                                        num_workers=args.num_workers, train=False)
-    with torch.no_grad():
-        results = evaluate_model_on_dataset(model, test_loader, args.device)
+                                        num_workers=args.num_workers, train=False,
+                                        class_mapping_json_path=class_mapping_json_path)
         
-        os.makedirs(args.scores_dir, exist_ok=True)
-        df = pd.DataFrame([results])
-        if args.phase == "base":
-            df_name = os.path.join(args.scores_dir, f"{args.phase}_{args.base_json}.csv")
+        with torch.no_grad():
+            results = evaluate_model_on_dataset(model, test_loader, args.device)
+        
+        if os.path.exists(final_score_path):
+            with open(final_score_path, 'r') as f:
+                cumm_score = json.load(f)
         else:
-            df_name = os.path.join(args.scores_dir, f"{args.phase}_{args.task_json}.csv")
-        df.to_csv(df_name, index=False)
+            cumm_score = {}
+        
+        cumm_score[str(n)] = results
+        
+        with open(final_score_path, 'w') as f:
+            json.dump(cumm_score, f, indent=4)
+        
         print(results)
+        
+        del test_loader
+        torch.cuda.empty_cache()
+        gc.collect()

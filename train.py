@@ -25,7 +25,7 @@ from utils import adjust_learning_rate, warmup_learning_rate, onehot
 from datasets.json_loader import prepare_loader_from_json
 
 
-def load_class_mapping_and_set_n_classes(class_mapping_path):
+def load_class_mapping_length(class_mapping_path):
         if not os.path.exists(class_mapping_path):
             raise FileNotFoundError(f"[ERROR] Class mapping file not found: {class_mapping_path}")
         
@@ -118,7 +118,7 @@ def train(args):
         )
 
         # 4. 전체 클래스 수 로드
-        args.n_classes = load_class_mapping_and_set_n_classes(curr_class_mapping_path)
+        args.n_classes = load_class_mapping_length(curr_class_mapping_path)
 
         # 5. 모델 초기화 및 weight load
         model = HGAD(args)
