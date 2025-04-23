@@ -247,7 +247,7 @@ class JSONDatasetForChunk(Dataset):
 
 
 def prepare_loader_from_json_by_chunk(json_data, batch_size=8, img_size=336, 
-                             msk_size=336, num_workers=8, train=False,
+                             msk_size=336, num_workers=2, train=False,
                              class_mapping_json_path=None):
     
     dataset = JSONDatasetForChunk(

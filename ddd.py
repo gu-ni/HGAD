@@ -19,3 +19,5 @@ save = '/workspace/MegaInspection/HGAD/outputs/scenario_1/base/class_mapping_bas
 with open(save, 'w') as f:
     json.dump(class_to_idx, f, indent=4)
 # %%
+329/542
+# %%

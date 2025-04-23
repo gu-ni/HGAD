@@ -7,5 +7,5 @@ python test.py \
     --device cuda \
     --json_path base_classes \
     --task_id 0 \
-    --chunk_size 512 \
+    --chunk_size 1024 \
     --start_idx 0
