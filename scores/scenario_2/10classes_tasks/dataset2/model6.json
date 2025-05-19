@@ -1,0 +1,62 @@
+{
+    "viaduct_45 damper large": {
+        "image_auroc": 0.6119230769230769,
+        "pixel_ap": 0.0720054954568815,
+        "normal_count": 65,
+        "anomaly_count": 40
+    },
+    "viaduct_26 hose screw fitting": {
+        "image_auroc": 0.45999999999999996,
+        "pixel_ap": 0.007043867435040941,
+        "normal_count": 50,
+        "anomaly_count": 19
+    },
+    "viaduct_24 pan screw": {
+        "image_auroc": 0.426,
+        "pixel_ap": 0.005913136274399483,
+        "normal_count": 130,
+        "anomaly_count": 100
+    },
+    "mpdd_tubes": {
+        "image_auroc": 0.5667372881355932,
+        "pixel_ap": 0.0466724158104905,
+        "normal_count": 32,
+        "anomaly_count": 59
+    },
+    "viaduct_34 oblong pill": {
+        "image_auroc": 0.5478991596638655,
+        "pixel_ap": 0.07692448202605773,
+        "normal_count": 105,
+        "anomaly_count": 136
+    },
+    "real_iad_rolled_strip_base": {
+        "image_auroc": 0.5614042978708268,
+        "pixel_ap": 0.020084646832552695,
+        "normal_count": 2515,
+        "anomaly_count": 2515
+    },
+    "real_iad_plastic_plug": {
+        "image_auroc": 0.45918872626775953,
+        "pixel_ap": 0.006400162348215909,
+        "normal_count": 3566,
+        "anomaly_count": 1409
+    },
+    "real_iad_fire_hood": {
+        "image_auroc": 0.5963789171468714,
+        "pixel_ap": 0.048126783155559176,
+        "normal_count": 3665,
+        "anomaly_count": 1340
+    },
+    "real_iad_mint": {
+        "image_auroc": 0.5287459162392435,
+        "pixel_ap": 0.005001774555454964,
+        "normal_count": 3196,
+        "anomaly_count": 2089
+    },
+    "real_iad_tape": {
+        "image_auroc": 0.736945028951517,
+        "pixel_ap": 0.11156449858766364,
+        "normal_count": 3647,
+        "anomaly_count": 1433
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "viaduct_16 vibration sensor": {
+        "image_auroc": 0.61,
+        "pixel_ap": 0.006122132934392524,
+        "normal_count": 50,
+        "anomaly_count": 20
+    },
+    "real_iad_plastic_nut": {
+        "image_auroc": 0.546270709301664,
+        "pixel_ap": 0.009337724809850716,
+        "normal_count": 3754,
+        "anomaly_count": 1236
+    },
+    "real_iad_pcb": {
+        "image_auroc": 0.5396956704916783,
+        "pixel_ap": 0.005606577938934251,
+        "normal_count": 2711,
+        "anomaly_count": 2279
+    },
+    "real_iad_usb_adaptor": {
+        "image_auroc": 0.6040925632084525,
+        "pixel_ap": 0.02832714582592599,
+        "normal_count": 3485,
+        "anomaly_count": 1510
+    },
+    "real_iad_mounts": {
+        "image_auroc": 0.6109700145802008,
+        "pixel_ap": 0.028451441453250497,
+        "normal_count": 3702,
+        "anomaly_count": 1328
+    }
+}

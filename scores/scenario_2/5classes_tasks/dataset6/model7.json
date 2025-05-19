@@ -1,0 +1,32 @@
+{
+    "viaduct_43 paperclip": {
+        "image_auroc": 0.40822510822510827,
+        "pixel_ap": 0.04054908391240682,
+        "normal_count": 110,
+        "anomaly_count": 63
+    },
+    "real_iad_woodstick": {
+        "image_auroc": 0.5866243824185925,
+        "pixel_ap": 0.03898655293502502,
+        "normal_count": 3922,
+        "anomaly_count": 1063
+    },
+    "real_iad_mint": {
+        "image_auroc": 0.5321646523209062,
+        "pixel_ap": 0.0037030841493177575,
+        "normal_count": 3196,
+        "anomaly_count": 2089
+    },
+    "real_iad_toy": {
+        "image_auroc": 0.5257118616546237,
+        "pixel_ap": 0.0036961153161593372,
+        "normal_count": 2825,
+        "anomaly_count": 2180
+    },
+    "real_iad_bottle_cap": {
+        "image_auroc": 0.6020566973119187,
+        "pixel_ap": 0.05203535144035506,
+        "normal_count": 3374,
+        "anomaly_count": 1621
+    }
+}

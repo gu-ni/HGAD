@@ -1,0 +1,32 @@
+{
+    "viaduct_14 terminal block A": {
+        "image_auroc": 0.4581587301587302,
+        "pixel_ap": 0.003498499745567951,
+        "normal_count": 105,
+        "anomaly_count": 75
+    },
+    "continual_ad_Mouse": {
+        "image_auroc": 0.5922259343922787,
+        "pixel_ap": 0.10335739140311198,
+        "normal_count": 517,
+        "anomaly_count": 495
+    },
+    "viaduct_00 shredded corn rough": {
+        "image_auroc": 0.6475961538461539,
+        "pixel_ap": 0.13406860085429562,
+        "normal_count": 80,
+        "anomaly_count": 130
+    },
+    "mpdd_bracket_black": {
+        "image_auroc": 0.4442567567567568,
+        "pixel_ap": 0.005848987846596004,
+        "normal_count": 32,
+        "anomaly_count": 37
+    },
+    "real_iad_u_block": {
+        "image_auroc": 0.6149402637340923,
+        "pixel_ap": 0.025843254443686143,
+        "normal_count": 3766,
+        "anomaly_count": 1204
+    }
+}

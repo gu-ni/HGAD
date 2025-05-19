@@ -1,0 +1,32 @@
+{
+    "mpdd_bracket_white": {
+        "image_auroc": 0.40166666666666667,
+        "pixel_ap": 0.003383086155843743,
+        "normal_count": 30,
+        "anomaly_count": 20
+    },
+    "viaduct_08 ethernet connector": {
+        "image_auroc": 0.5013333333333334,
+        "pixel_ap": 0.019606900789207873,
+        "normal_count": 50,
+        "anomaly_count": 30
+    },
+    "viaduct_24 pan screw": {
+        "image_auroc": 0.49676923076923074,
+        "pixel_ap": 0.006593544478866565,
+        "normal_count": 130,
+        "anomaly_count": 100
+    },
+    "viaduct_25 reinforcing sleeve": {
+        "image_auroc": 0.5018181818181818,
+        "pixel_ap": 0.007243953473890574,
+        "normal_count": 50,
+        "anomaly_count": 11
+    },
+    "real_iad_end_cap": {
+        "image_auroc": 0.5086871487799814,
+        "pixel_ap": 0.005320973361297726,
+        "normal_count": 2817,
+        "anomaly_count": 2173
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "viaduct_30 valve handle blue": {
+        "image_auroc": 0.6485714285714286,
+        "pixel_ap": 0.0034181001267110885,
+        "normal_count": 50,
+        "anomaly_count": 14
+    },
+    "viaduct_08 ethernet connector": {
+        "image_auroc": 0.47266666666666673,
+        "pixel_ap": 0.023094289204503366,
+        "normal_count": 50,
+        "anomaly_count": 30
+    },
+    "viaduct_43 paperclip": {
+        "image_auroc": 0.42467532467532465,
+        "pixel_ap": 0.039478340519019134,
+        "normal_count": 110,
+        "anomaly_count": 63
+    },
+    "btad_01": {
+        "image_auroc": 0.8595848595848596,
+        "pixel_ap": 0.08279402876057741,
+        "normal_count": 21,
+        "anomaly_count": 39
+    },
+    "real_iad_eraser": {
+        "image_auroc": 0.595797327251421,
+        "pixel_ap": 0.03115800522586404,
+        "normal_count": 3567,
+        "anomaly_count": 1478
+    }
+}

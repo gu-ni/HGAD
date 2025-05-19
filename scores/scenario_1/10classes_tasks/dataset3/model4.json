@@ -1,0 +1,62 @@
+{
+    "continual_ad_Calculator": {
+        "image_auroc": 0.6110079051383399,
+        "pixel_ap": 0.010345881553759565,
+        "normal_count": 506,
+        "anomaly_count": 500
+    },
+    "viaduct_14 terminal block A": {
+        "image_auroc": 0.5008253968253968,
+        "pixel_ap": 0.003592170785640681,
+        "normal_count": 105,
+        "anomaly_count": 75
+    },
+    "viaduct_08 ethernet connector": {
+        "image_auroc": 0.5113333333333334,
+        "pixel_ap": 0.018925945762493165,
+        "normal_count": 50,
+        "anomaly_count": 30
+    },
+    "viaduct_13 socket housing": {
+        "image_auroc": 0.4470414201183432,
+        "pixel_ap": 0.013839622218170089,
+        "normal_count": 65,
+        "anomaly_count": 52
+    },
+    "mvtec_capsule": {
+        "image_auroc": 0.49187527448397017,
+        "pixel_ap": 0.06392318465102056,
+        "normal_count": 23,
+        "anomaly_count": 99
+    },
+    "visa_fryum": {
+        "image_auroc": 0.4393333333333333,
+        "pixel_ap": 0.09498159940708419,
+        "normal_count": 50,
+        "anomaly_count": 90
+    },
+    "viaduct_21 cylinder screw": {
+        "image_auroc": 0.5767676767676768,
+        "pixel_ap": 0.005471800864794659,
+        "normal_count": 180,
+        "anomaly_count": 22
+    },
+    "viaduct_34 oblong pill": {
+        "image_auroc": 0.5492997198879551,
+        "pixel_ap": 0.07216373418739286,
+        "normal_count": 105,
+        "anomaly_count": 136
+    },
+    "real_iad_transistor1": {
+        "image_auroc": 0.5696347067793679,
+        "pixel_ap": 0.014246935668787654,
+        "normal_count": 2873,
+        "anomaly_count": 2107
+    },
+    "real_iad_u_block": {
+        "image_auroc": 0.6164981791973295,
+        "pixel_ap": 0.02866439724786284,
+        "normal_count": 3766,
+        "anomaly_count": 1204
+    }
+}

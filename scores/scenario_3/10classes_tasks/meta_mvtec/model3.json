@@ -1,0 +1,92 @@
+{
+    "bottle": {
+        "image_auroc": 0.3007936507936508,
+        "pixel_ap": 0.20983847211342452,
+        "normal_count": 20,
+        "anomaly_count": 63
+    },
+    "cable": {
+        "image_auroc": 0.617503748125937,
+        "pixel_ap": 0.07378709440245,
+        "normal_count": 58,
+        "anomaly_count": 92
+    },
+    "capsule": {
+        "image_auroc": 0.5281212604706822,
+        "pixel_ap": 0.05988756468258152,
+        "normal_count": 23,
+        "anomaly_count": 109
+    },
+    "carpet": {
+        "image_auroc": 0.7467897271268058,
+        "pixel_ap": 0.39365599297945947,
+        "normal_count": 28,
+        "anomaly_count": 89
+    },
+    "grid": {
+        "image_auroc": 0.5363408521303259,
+        "pixel_ap": 0.11331156288749372,
+        "normal_count": 21,
+        "anomaly_count": 57
+    },
+    "hazelnut": {
+        "image_auroc": 0.5607142857142857,
+        "pixel_ap": 0.20118168301310846,
+        "normal_count": 40,
+        "anomaly_count": 70
+    },
+    "leather": {
+        "image_auroc": 0.2982336956521739,
+        "pixel_ap": 0.22203773101028815,
+        "normal_count": 32,
+        "anomaly_count": 92
+    },
+    "metal_nut": {
+        "image_auroc": 0.5395894428152492,
+        "pixel_ap": 0.12988149217141587,
+        "normal_count": 22,
+        "anomaly_count": 93
+    },
+    "pill": {
+        "image_auroc": 0.5507364975450082,
+        "pixel_ap": 0.059932039703363166,
+        "normal_count": 26,
+        "anomaly_count": 141
+    },
+    "screw": {
+        "image_auroc": 0.5103504816560771,
+        "pixel_ap": 0.02922106448787416,
+        "normal_count": 41,
+        "anomaly_count": 119
+    },
+    "tile": {
+        "image_auroc": 0.5245310245310245,
+        "pixel_ap": 0.24954358169103996,
+        "normal_count": 33,
+        "anomaly_count": 84
+    },
+    "toothbrush": {
+        "image_auroc": 0.4305555555555556,
+        "pixel_ap": 0.043318543576224264,
+        "normal_count": 12,
+        "anomaly_count": 30
+    },
+    "transistor": {
+        "image_auroc": 0.5137499999999999,
+        "pixel_ap": 0.06213624180186371,
+        "normal_count": 60,
+        "anomaly_count": 40
+    },
+    "wood": {
+        "image_auroc": 0.29210526315789476,
+        "pixel_ap": 0.25078243433055114,
+        "normal_count": 19,
+        "anomaly_count": 60
+    },
+    "zipper": {
+        "image_auroc": 0.3978466386554622,
+        "pixel_ap": 0.2041509212253992,
+        "normal_count": 32,
+        "anomaly_count": 119
+    }
+}

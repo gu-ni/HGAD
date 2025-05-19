@@ -1,0 +1,32 @@
+{
+    "viaduct_36 redon needle": {
+        "image_auroc": 0.5850970017636683,
+        "pixel_ap": 0.013592331204353582,
+        "normal_count": 180,
+        "anomaly_count": 63
+    },
+    "continual_ad_Food-container": {
+        "image_auroc": 0.4101305647317917,
+        "pixel_ap": 0.047416004866133746,
+        "normal_count": 520,
+        "anomaly_count": 489
+    },
+    "viaduct_23 pipe clamp": {
+        "image_auroc": 0.4,
+        "pixel_ap": 0.030199152979440293,
+        "normal_count": 50,
+        "anomaly_count": 19
+    },
+    "mvtec_transistor": {
+        "image_auroc": 0.5394444444444445,
+        "pixel_ap": 0.053526275889806976,
+        "normal_count": 60,
+        "anomaly_count": 30
+    },
+    "real_iad_sim_card_set": {
+        "image_auroc": 0.4805176306086675,
+        "pixel_ap": 0.019905489666039975,
+        "normal_count": 2951,
+        "anomaly_count": 2059
+    }
+}

@@ -1,0 +1,512 @@
+{
+    "continual_ad_Energy-bar": {
+        "image_auroc": 0.5089334783925347,
+        "pixel_ap": 0.09171310406586151,
+        "normal_count": 329,
+        "anomaly_count": 542
+    },
+    "continual_ad_Apple": {
+        "image_auroc": 0.3489917879502399,
+        "pixel_ap": 0.05069803372725629,
+        "normal_count": 490,
+        "anomaly_count": 502
+    },
+    "continual_ad_Kleenex": {
+        "image_auroc": 0.5523161528580605,
+        "pixel_ap": 0.031119941993073826,
+        "normal_count": 480,
+        "anomaly_count": 519
+    },
+    "continual_ad_Ruler": {
+        "image_auroc": 0.4989243350769911,
+        "pixel_ap": 0.004885232128900526,
+        "normal_count": 277,
+        "anomaly_count": 490
+    },
+    "continual_ad_Toothpaste": {
+        "image_auroc": 0.44145435725403087,
+        "pixel_ap": 0.011087609887989394,
+        "normal_count": 513,
+        "anomaly_count": 516
+    },
+    "continual_ad_Sunglasses": {
+        "image_auroc": 0.5133764031559623,
+        "pixel_ap": 0.03342198596074806,
+        "normal_count": 499,
+        "anomaly_count": 572
+    },
+    "continual_ad_Capsule": {
+        "image_auroc": 0.523922688847014,
+        "pixel_ap": 0.04430223348957969,
+        "normal_count": 507,
+        "anomaly_count": 493
+    },
+    "continual_ad_Flash-drive": {
+        "image_auroc": 0.545822206741747,
+        "pixel_ap": 0.04919238740541218,
+        "normal_count": 522,
+        "anomaly_count": 495
+    },
+    "continual_ad_Band-aid": {
+        "image_auroc": 0.7892037098297735,
+        "pixel_ap": 0.052873342127678365,
+        "normal_count": 511,
+        "anomaly_count": 491
+    },
+    "continual_ad_Cucumber": {
+        "image_auroc": 0.3795887281035796,
+        "pixel_ap": 0.016716664040474286,
+        "normal_count": 505,
+        "anomaly_count": 507
+    },
+    "continual_ad_Toothbrush": {
+        "image_auroc": 0.41629872495446263,
+        "pixel_ap": 0.00724479089990174,
+        "normal_count": 500,
+        "anomaly_count": 549
+    },
+    "continual_ad_Soap": {
+        "image_auroc": 0.4980343655467334,
+        "pixel_ap": 0.03244589600760563,
+        "normal_count": 394,
+        "anomaly_count": 787
+    },
+    "continual_ad_Dollar": {
+        "image_auroc": 0.5201911428186835,
+        "pixel_ap": 0.04092728705811492,
+        "normal_count": 391,
+        "anomaly_count": 494
+    },
+    "continual_ad_Pencil": {
+        "image_auroc": 0.38948716608291073,
+        "pixel_ap": 0.0048692615359960814,
+        "normal_count": 518,
+        "anomaly_count": 517
+    },
+    "continual_ad_Fork": {
+        "image_auroc": 0.3759765517393364,
+        "pixel_ap": 0.03275488875950634,
+        "normal_count": 537,
+        "anomaly_count": 507
+    },
+    "continual_ad_Toy": {
+        "image_auroc": 0.581433368681513,
+        "pixel_ap": 0.012478996501436595,
+        "normal_count": 368,
+        "anomaly_count": 492
+    },
+    "continual_ad_Multi-pen": {
+        "image_auroc": 0.470849379546427,
+        "pixel_ap": 0.010129442439154646,
+        "normal_count": 494,
+        "anomaly_count": 492
+    },
+    "continual_ad_Chopsticks": {
+        "image_auroc": 0.487223908146665,
+        "pixel_ap": 0.013521257961672717,
+        "normal_count": 488,
+        "anomaly_count": 524
+    },
+    "mvtec_leather": {
+        "image_auroc": 0.3296493902439024,
+        "pixel_ap": 0.29622829294139646,
+        "normal_count": 32,
+        "anomaly_count": 82
+    },
+    "mvtec_hazelnut": {
+        "image_auroc": 0.51875,
+        "pixel_ap": 0.17735847598789795,
+        "normal_count": 40,
+        "anomaly_count": 60
+    },
+    "mvtec_pill": {
+        "image_auroc": 0.504697592483852,
+        "pixel_ap": 0.05468896687950701,
+        "normal_count": 26,
+        "anomaly_count": 131
+    },
+    "mvtec_wood": {
+        "image_auroc": 0.3610526315789474,
+        "pixel_ap": 0.29364918071141477,
+        "normal_count": 19,
+        "anomaly_count": 50
+    },
+    "mvtec_screw": {
+        "image_auroc": 0.4696800179010964,
+        "pixel_ap": 0.023773520525471346,
+        "normal_count": 41,
+        "anomaly_count": 109
+    },
+    "mvtec_zipper": {
+        "image_auroc": 0.5280963302752294,
+        "pixel_ap": 0.18884602728787062,
+        "normal_count": 32,
+        "anomaly_count": 109
+    },
+    "mvtec_grid": {
+        "image_auroc": 0.5653495440729484,
+        "pixel_ap": 0.1397203082354902,
+        "normal_count": 21,
+        "anomaly_count": 47
+    },
+    "mvtec_metal_nut": {
+        "image_auroc": 0.5328587075575028,
+        "pixel_ap": 0.13250895133349674,
+        "normal_count": 22,
+        "anomaly_count": 83
+    },
+    "mvtec_bottle": {
+        "image_auroc": 0.3264150943396227,
+        "pixel_ap": 0.18480090412284764,
+        "normal_count": 20,
+        "anomaly_count": 53
+    },
+    "visa_pcb4": {
+        "image_auroc": 0.5986798679867986,
+        "pixel_ap": 0.013946016079080073,
+        "normal_count": 101,
+        "anomaly_count": 90
+    },
+    "visa_candle": {
+        "image_auroc": 0.4967777777777777,
+        "pixel_ap": 0.01612946278804964,
+        "normal_count": 100,
+        "anomaly_count": 90
+    },
+    "visa_pipe_fryum": {
+        "image_auroc": 0.7095555555555555,
+        "pixel_ap": 0.07490534977354016,
+        "normal_count": 50,
+        "anomaly_count": 90
+    },
+    "visa_cashew": {
+        "image_auroc": 0.5391111111111111,
+        "pixel_ap": 0.04433905756888961,
+        "normal_count": 50,
+        "anomaly_count": 90
+    },
+    "visa_chewinggum": {
+        "image_auroc": 0.5397777777777777,
+        "pixel_ap": 0.03864261561561718,
+        "normal_count": 50,
+        "anomaly_count": 90
+    },
+    "visa_pcb1": {
+        "image_auroc": 0.6864444444444445,
+        "pixel_ap": 0.013130256586634196,
+        "normal_count": 100,
+        "anomaly_count": 90
+    },
+    "visa_macaroni2": {
+        "image_auroc": 0.6251111111111112,
+        "pixel_ap": 0.006311249681411153,
+        "normal_count": 100,
+        "anomaly_count": 90
+    },
+    "viaduct_10 PCB": {
+        "image_auroc": 0.4933333333333333,
+        "pixel_ap": 0.009084219026952106,
+        "normal_count": 50,
+        "anomaly_count": 45
+    },
+    "viaduct_43 paperclip": {
+        "image_auroc": 0.4242424242424242,
+        "pixel_ap": 0.03849661132928308,
+        "normal_count": 110,
+        "anomaly_count": 63
+    },
+    "viaduct_37 retractor": {
+        "image_auroc": 0.5213675213675214,
+        "pixel_ap": 0.014607065989869427,
+        "normal_count": 180,
+        "anomaly_count": 65
+    },
+    "viaduct_44 tack": {
+        "image_auroc": 0.5244069343065694,
+        "pixel_ap": 0.06608867277413238,
+        "normal_count": 160,
+        "anomaly_count": 137
+    },
+    "viaduct_39 self-tapping bolt": {
+        "image_auroc": 0.5429591836734694,
+        "pixel_ap": 0.044676996721685756,
+        "normal_count": 140,
+        "anomaly_count": 140
+    },
+    "viaduct_12 rotary encoder": {
+        "image_auroc": 0.3463157894736842,
+        "pixel_ap": 0.004595757978065782,
+        "normal_count": 50,
+        "anomaly_count": 19
+    },
+    "viaduct_06 coaxial t-adapter": {
+        "image_auroc": 0.4836734693877551,
+        "pixel_ap": 0.014885439762357842,
+        "normal_count": 105,
+        "anomaly_count": 14
+    },
+    "viaduct_19 strawberry": {
+        "image_auroc": 0.39208465608465615,
+        "pixel_ap": 0.0831662919201925,
+        "normal_count": 175,
+        "anomaly_count": 135
+    },
+    "viaduct_15 terminal block B": {
+        "image_auroc": 0.46092307692307694,
+        "pixel_ap": 0.004328141803515692,
+        "normal_count": 65,
+        "anomaly_count": 50
+    },
+    "viaduct_28 key": {
+        "image_auroc": 0.4014814814814815,
+        "pixel_ap": 0.0921468227610252,
+        "normal_count": 90,
+        "anomaly_count": 30
+    },
+    "viaduct_02 shredded corn fine": {
+        "image_auroc": 0.7215994531784005,
+        "pixel_ap": 0.17138625621580314,
+        "normal_count": 110,
+        "anomaly_count": 133
+    },
+    "viaduct_20 tea bag": {
+        "image_auroc": 0.4862698412698413,
+        "pixel_ap": 0.04531064299342663,
+        "normal_count": 140,
+        "anomaly_count": 90
+    },
+    "viaduct_26 hose screw fitting": {
+        "image_auroc": 0.49894736842105264,
+        "pixel_ap": 0.006062885181992105,
+        "normal_count": 50,
+        "anomaly_count": 19
+    },
+    "viaduct_48 saw blade": {
+        "image_auroc": 0.409,
+        "pixel_ap": 0.0014191897698142906,
+        "normal_count": 50,
+        "anomaly_count": 20
+    },
+    "viaduct_16 vibration sensor": {
+        "image_auroc": 0.58,
+        "pixel_ap": 0.005128393057502224,
+        "normal_count": 50,
+        "anomaly_count": 20
+    },
+    "viaduct_33 drill": {
+        "image_auroc": 0.6057165861513687,
+        "pixel_ap": 0.01699994783231594,
+        "normal_count": 180,
+        "anomaly_count": 138
+    },
+    "viaduct_09 joystick": {
+        "image_auroc": 0.4457786116322701,
+        "pixel_ap": 0.010462570338508042,
+        "normal_count": 65,
+        "anomaly_count": 41
+    },
+    "viaduct_41 white tablet": {
+        "image_auroc": 0.4946,
+        "pixel_ap": 0.13634190600406174,
+        "normal_count": 50,
+        "anomaly_count": 100
+    },
+    "viaduct_47 mains tester": {
+        "image_auroc": 0.578,
+        "pixel_ap": 0.0004663764153824982,
+        "normal_count": 50,
+        "anomaly_count": 20
+    },
+    "viaduct_46 damper small": {
+        "image_auroc": 0.38557692307692304,
+        "pixel_ap": 0.06621104663632756,
+        "normal_count": 65,
+        "anomaly_count": 48
+    },
+    "viaduct_38 round pill": {
+        "image_auroc": 0.5224390243902439,
+        "pixel_ap": 0.18264975891926344,
+        "normal_count": 50,
+        "anomaly_count": 82
+    },
+    "viaduct_07 d-sub connector": {
+        "image_auroc": 0.40169172932330827,
+        "pixel_ap": 0.0007923346672994312,
+        "normal_count": 140,
+        "anomaly_count": 38
+    },
+    "viaduct_22 device box": {
+        "image_auroc": 0.3327777777777778,
+        "pixel_ap": 0.0006550336806549123,
+        "normal_count": 50,
+        "anomaly_count": 36
+    },
+    "viaduct_40 surgical mask": {
+        "image_auroc": 0.5506775067750678,
+        "pixel_ap": 0.00032403556058413626,
+        "normal_count": 105,
+        "anomaly_count": 123
+    },
+    "viaduct_45 damper large": {
+        "image_auroc": 0.5865384615384616,
+        "pixel_ap": 0.06500761197200856,
+        "normal_count": 65,
+        "anomaly_count": 40
+    },
+    "viaduct_03 3-pole socket housing": {
+        "image_auroc": 0.5182496607869742,
+        "pixel_ap": 0.04517551328963794,
+        "normal_count": 110,
+        "anomaly_count": 134
+    },
+    "viaduct_42 aluminium plate": {
+        "image_auroc": 0.5263333333333333,
+        "pixel_ap": 0.02497403496702922,
+        "normal_count": 20,
+        "anomaly_count": 150
+    },
+    "btad_03": {
+        "image_auroc": 0.35782258064516126,
+        "pixel_ap": 0.016336348545304788,
+        "normal_count": 400,
+        "anomaly_count": 31
+    },
+    "btad_01": {
+        "image_auroc": 0.8913308913308913,
+        "pixel_ap": 0.12647032013951787,
+        "normal_count": 21,
+        "anomaly_count": 39
+    },
+    "mpdd_connector": {
+        "image_auroc": 0.5916666666666667,
+        "pixel_ap": 0.017947079253241953,
+        "normal_count": 30,
+        "anomaly_count": 4
+    },
+    "mpdd_bracket_brown": {
+        "image_auroc": 0.5722326454033771,
+        "pixel_ap": 0.057932978756123264,
+        "normal_count": 26,
+        "anomaly_count": 41
+    },
+    "mpdd_metal_plate": {
+        "image_auroc": 0.4476670870113493,
+        "pixel_ap": 0.21790738289582126,
+        "normal_count": 26,
+        "anomaly_count": 61
+    },
+    "mpdd_tubes": {
+        "image_auroc": 0.4401483050847458,
+        "pixel_ap": 0.04631687009881483,
+        "normal_count": 32,
+        "anomaly_count": 59
+    },
+    "real_iad_toy": {
+        "image_auroc": 0.526449135341398,
+        "pixel_ap": 0.004491714281261149,
+        "normal_count": 2825,
+        "anomaly_count": 2180
+    },
+    "real_iad_zipper": {
+        "image_auroc": 0.6327008557458795,
+        "pixel_ap": 0.11390812538038013,
+        "normal_count": 2664,
+        "anomaly_count": 2321
+    },
+    "real_iad_regulator": {
+        "image_auroc": 0.43240729950823875,
+        "pixel_ap": 0.000668025915274674,
+        "normal_count": 4010,
+        "anomaly_count": 1070
+    },
+    "real_iad_porcelain_doll": {
+        "image_auroc": 0.7031322075450395,
+        "pixel_ap": 0.05946124033881398,
+        "normal_count": 3735,
+        "anomaly_count": 1245
+    },
+    "real_iad_plastic_nut": {
+        "image_auroc": 0.515570877579557,
+        "pixel_ap": 0.003936166918174102,
+        "normal_count": 3754,
+        "anomaly_count": 1236
+    },
+    "real_iad_switch": {
+        "image_auroc": 0.5161128158558024,
+        "pixel_ap": 0.006187181501258356,
+        "normal_count": 3046,
+        "anomaly_count": 1984
+    },
+    "real_iad_toy_brick": {
+        "image_auroc": 0.5359428111350903,
+        "pixel_ap": 0.013490038556921729,
+        "normal_count": 3464,
+        "anomaly_count": 1526
+    },
+    "real_iad_usb_adaptor": {
+        "image_auroc": 0.5522747441732306,
+        "pixel_ap": 0.016799151203973257,
+        "normal_count": 3485,
+        "anomaly_count": 1510
+    },
+    "real_iad_rolled_strip_base": {
+        "image_auroc": 0.5622771521961669,
+        "pixel_ap": 0.021512825548577065,
+        "normal_count": 2515,
+        "anomaly_count": 2515
+    },
+    "real_iad_usb": {
+        "image_auroc": 0.5277581566501198,
+        "pixel_ap": 0.004932883834172098,
+        "normal_count": 3286,
+        "anomaly_count": 1744
+    },
+    "real_iad_woodstick": {
+        "image_auroc": 0.5965693679621864,
+        "pixel_ap": 0.04715776956971107,
+        "normal_count": 3922,
+        "anomaly_count": 1063
+    },
+    "real_iad_toothbrush": {
+        "image_auroc": 0.4986725869195397,
+        "pixel_ap": 0.016355200399133896,
+        "normal_count": 2968,
+        "anomaly_count": 2017
+    },
+    "real_iad_pcb": {
+        "image_auroc": 0.5573585844419457,
+        "pixel_ap": 0.005539843827585693,
+        "normal_count": 2711,
+        "anomaly_count": 2279
+    },
+    "real_iad_tape": {
+        "image_auroc": 0.7514694849038995,
+        "pixel_ap": 0.10739583930081552,
+        "normal_count": 3647,
+        "anomaly_count": 1433
+    },
+    "real_iad_wooden_beads": {
+        "image_auroc": 0.5956179701491029,
+        "pixel_ap": 0.030879591823514425,
+        "normal_count": 3311,
+        "anomaly_count": 1674
+    },
+    "real_iad_terminalblock": {
+        "image_auroc": 0.4614333990983068,
+        "pixel_ap": 0.005620217129074313,
+        "normal_count": 3032,
+        "anomaly_count": 1998
+    },
+    "real_iad_mint": {
+        "image_auroc": 0.5379312699994189,
+        "pixel_ap": 0.0048586914005216576,
+        "normal_count": 3196,
+        "anomaly_count": 2089
+    },
+    "real_iad_plastic_plug": {
+        "image_auroc": 0.4874428151372059,
+        "pixel_ap": 0.006310230813252389,
+        "normal_count": 3566,
+        "anomaly_count": 1409
+    }
+}

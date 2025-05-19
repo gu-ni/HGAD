@@ -1,0 +1,182 @@
+{
+    "mvtec_cable": {
+        "image_auroc": 0.5559293523969723,
+        "pixel_ap": 0.06697838304718724,
+        "normal_count": 58,
+        "anomaly_count": 82
+    },
+    "viaduct_18 raspberry": {
+        "image_auroc": 0.4834733893557423,
+        "pixel_ap": 0.06969939296843071,
+        "normal_count": 170,
+        "anomaly_count": 84
+    },
+    "visa_pcb2": {
+        "image_auroc": 0.47244444444444444,
+        "pixel_ap": 0.0056952392602816265,
+        "normal_count": 100,
+        "anomaly_count": 90
+    },
+    "viaduct_17 cherry": {
+        "image_auroc": 0.525064935064935,
+        "pixel_ap": 0.008308709926365825,
+        "normal_count": 275,
+        "anomaly_count": 112
+    },
+    "mvtec_tile": {
+        "image_auroc": 0.6044226044226043,
+        "pixel_ap": 0.2853978016796812,
+        "normal_count": 33,
+        "anomaly_count": 74
+    },
+    "continual_ad_Notebook": {
+        "image_auroc": 0.5624167134723186,
+        "pixel_ap": 0.053391678040479104,
+        "normal_count": 354,
+        "anomaly_count": 513
+    },
+    "viaduct_08 ethernet connector": {
+        "image_auroc": 0.5006666666666667,
+        "pixel_ap": 0.02063840711456613,
+        "normal_count": 50,
+        "anomaly_count": 30
+    },
+    "visa_fryum": {
+        "image_auroc": 0.45999999999999996,
+        "pixel_ap": 0.10228515080603154,
+        "normal_count": 50,
+        "anomaly_count": 90
+    },
+    "viaduct_11 ring cable lug": {
+        "image_auroc": 0.5142857142857143,
+        "pixel_ap": 0.02513991137656866,
+        "normal_count": 140,
+        "anomaly_count": 56
+    },
+    "viaduct_24 pan screw": {
+        "image_auroc": 0.48353846153846153,
+        "pixel_ap": 0.00668306089643089,
+        "normal_count": 130,
+        "anomaly_count": 100
+    },
+    "visa_capsules": {
+        "image_auroc": 0.5185185185185185,
+        "pixel_ap": 0.012213882368470494,
+        "normal_count": 60,
+        "anomaly_count": 90
+    },
+    "viaduct_14 terminal block A": {
+        "image_auroc": 0.4854603174603175,
+        "pixel_ap": 0.0036354312439945574,
+        "normal_count": 105,
+        "anomaly_count": 75
+    },
+    "continual_ad_Food-container": {
+        "image_auroc": 0.40191914425043257,
+        "pixel_ap": 0.04532206798150045,
+        "normal_count": 520,
+        "anomaly_count": 489
+    },
+    "viaduct_25 reinforcing sleeve": {
+        "image_auroc": 0.48,
+        "pixel_ap": 0.007749125153497164,
+        "normal_count": 50,
+        "anomaly_count": 11
+    },
+    "mvtec_capsule": {
+        "image_auroc": 0.46025472112428634,
+        "pixel_ap": 0.06769787626693767,
+        "normal_count": 23,
+        "anomaly_count": 99
+    },
+    "viaduct_31 valve handle red": {
+        "image_auroc": 0.5222222222222223,
+        "pixel_ap": 0.00875601684424127,
+        "normal_count": 45,
+        "anomaly_count": 16
+    },
+    "continual_ad_Cup": {
+        "image_auroc": 0.42878999270697915,
+        "pixel_ap": 0.019644218915929518,
+        "normal_count": 517,
+        "anomaly_count": 488
+    },
+    "viaduct_04 battery tray": {
+        "image_auroc": 0.6276923076923077,
+        "pixel_ap": 0.0019365820639756512,
+        "normal_count": 65,
+        "anomaly_count": 30
+    },
+    "mvtec_transistor": {
+        "image_auroc": 0.5422222222222223,
+        "pixel_ap": 0.059229655415406916,
+        "normal_count": 60,
+        "anomaly_count": 30
+    },
+    "visa_macaroni1": {
+        "image_auroc": 0.6584444444444444,
+        "pixel_ap": 0.01685870647331515,
+        "normal_count": 100,
+        "anomaly_count": 90
+    },
+    "viaduct_01 shredded corn medium": {
+        "image_auroc": 0.7518065433854907,
+        "pixel_ap": 0.15105006762199727,
+        "normal_count": 185,
+        "anomaly_count": 95
+    },
+    "viaduct_27 L-fitting": {
+        "image_auroc": 0.45125,
+        "pixel_ap": 0.00407922852558383,
+        "normal_count": 50,
+        "anomaly_count": 16
+    },
+    "viaduct_32 bone pliers": {
+        "image_auroc": 0.518060918060918,
+        "pixel_ap": 0.0036277003356992845,
+        "normal_count": 185,
+        "anomaly_count": 63
+    },
+    "real_iad_vcpill": {
+        "image_auroc": 0.5624761867959889,
+        "pixel_ap": 0.06279230760120313,
+        "normal_count": 3545,
+        "anomaly_count": 1460
+    },
+    "real_iad_audiojack": {
+        "image_auroc": 0.5302093510321543,
+        "pixel_ap": 0.02324280055226167,
+        "normal_count": 3744,
+        "anomaly_count": 1286
+    },
+    "real_iad_end_cap": {
+        "image_auroc": 0.5133774609191025,
+        "pixel_ap": 0.005102641894827342,
+        "normal_count": 2817,
+        "anomaly_count": 2173
+    },
+    "real_iad_button_battery": {
+        "image_auroc": 0.5018165065157298,
+        "pixel_ap": 0.018169084940918408,
+        "normal_count": 2840,
+        "anomaly_count": 2140
+    },
+    "real_iad_sim_card_set": {
+        "image_auroc": 0.4675807329987003,
+        "pixel_ap": 0.02049755087840609,
+        "normal_count": 2951,
+        "anomaly_count": 2059
+    },
+    "real_iad_eraser": {
+        "image_auroc": 0.5913652550271945,
+        "pixel_ap": 0.035227308949876274,
+        "normal_count": 3567,
+        "anomaly_count": 1478
+    },
+    "real_iad_mounts": {
+        "image_auroc": 0.6739546313292066,
+        "pixel_ap": 0.03937286305502683,
+        "normal_count": 3702,
+        "anomaly_count": 1328
+    }
+}

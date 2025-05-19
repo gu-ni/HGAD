@@ -1,0 +1,182 @@
+{
+    "continual_ad_Energy-bar": {
+        "image_auroc": 0.5043910317522629,
+        "pixel_ap": 0.08985287948016209,
+        "normal_count": 329,
+        "anomaly_count": 542
+    },
+    "continual_ad_Apple": {
+        "image_auroc": 0.3904057240426051,
+        "pixel_ap": 0.04872821721419622,
+        "normal_count": 490,
+        "anomaly_count": 502
+    },
+    "continual_ad_Kleenex": {
+        "image_auroc": 0.5645191072575466,
+        "pixel_ap": 0.030936521034582033,
+        "normal_count": 480,
+        "anomaly_count": 519
+    },
+    "continual_ad_Ruler": {
+        "image_auroc": 0.5086642599277978,
+        "pixel_ap": 0.004800518366756165,
+        "normal_count": 277,
+        "anomaly_count": 490
+    },
+    "continual_ad_Toothpaste": {
+        "image_auroc": 0.4977824621847469,
+        "pixel_ap": 0.010936701561610244,
+        "normal_count": 513,
+        "anomaly_count": 516
+    },
+    "continual_ad_Sunglasses": {
+        "image_auroc": 0.4967067001135138,
+        "pixel_ap": 0.031470021276070466,
+        "normal_count": 499,
+        "anomaly_count": 572
+    },
+    "continual_ad_Capsule": {
+        "image_auroc": 0.5441346503914768,
+        "pixel_ap": 0.03888789727813168,
+        "normal_count": 507,
+        "anomaly_count": 493
+    },
+    "continual_ad_Flash-drive": {
+        "image_auroc": 0.5209876543209877,
+        "pixel_ap": 0.04627572942038158,
+        "normal_count": 522,
+        "anomaly_count": 495
+    },
+    "continual_ad_Band-aid": {
+        "image_auroc": 0.7562604373836692,
+        "pixel_ap": 0.04418773479882588,
+        "normal_count": 511,
+        "anomaly_count": 491
+    },
+    "continual_ad_Cucumber": {
+        "image_auroc": 0.45405120393696174,
+        "pixel_ap": 0.016367859842384022,
+        "normal_count": 505,
+        "anomaly_count": 507
+    },
+    "continual_ad_Toothbrush": {
+        "image_auroc": 0.37983970856102006,
+        "pixel_ap": 0.007128573717272457,
+        "normal_count": 500,
+        "anomaly_count": 549
+    },
+    "continual_ad_Soap": {
+        "image_auroc": 0.4785505582466347,
+        "pixel_ap": 0.029104669617698493,
+        "normal_count": 394,
+        "anomaly_count": 787
+    },
+    "continual_ad_Dollar": {
+        "image_auroc": 0.47394307133168356,
+        "pixel_ap": 0.03479521969555417,
+        "normal_count": 391,
+        "anomaly_count": 494
+    },
+    "continual_ad_Pencil": {
+        "image_auroc": 0.42777234266595965,
+        "pixel_ap": 0.005263421675811632,
+        "normal_count": 518,
+        "anomaly_count": 517
+    },
+    "continual_ad_Fork": {
+        "image_auroc": 0.453487304368267,
+        "pixel_ap": 0.03141065052179153,
+        "normal_count": 537,
+        "anomaly_count": 507
+    },
+    "continual_ad_Toy": {
+        "image_auroc": 0.5373309915164368,
+        "pixel_ap": 0.012546220068762732,
+        "normal_count": 368,
+        "anomaly_count": 492
+    },
+    "continual_ad_Multi-pen": {
+        "image_auroc": 0.44643856357591916,
+        "pixel_ap": 0.009554210475030108,
+        "normal_count": 494,
+        "anomaly_count": 492
+    },
+    "continual_ad_Chopsticks": {
+        "image_auroc": 0.47950233074709053,
+        "pixel_ap": 0.012675385442533887,
+        "normal_count": 488,
+        "anomaly_count": 524
+    },
+    "continual_ad_Watermelon": {
+        "image_auroc": 0.45549582077444906,
+        "pixel_ap": 0.055493120919678764,
+        "normal_count": 497,
+        "anomaly_count": 506
+    },
+    "continual_ad_Egg": {
+        "image_auroc": 0.6807889441979805,
+        "pixel_ap": 0.3053693652666398,
+        "normal_count": 662,
+        "anomaly_count": 491
+    },
+    "continual_ad_Spoon": {
+        "image_auroc": 0.5654502145276904,
+        "pixel_ap": 0.00556534739425728,
+        "normal_count": 527,
+        "anomaly_count": 517
+    },
+    "continual_ad_Calculator": {
+        "image_auroc": 0.5747865612648221,
+        "pixel_ap": 0.007649423081846115,
+        "normal_count": 506,
+        "anomaly_count": 500
+    },
+    "continual_ad_Eraser": {
+        "image_auroc": 0.22733641646322594,
+        "pixel_ap": 0.05956937650884084,
+        "normal_count": 458,
+        "anomaly_count": 508
+    },
+    "continual_ad_Mango": {
+        "image_auroc": 0.45028942008789796,
+        "pixel_ap": 0.062417569833391064,
+        "normal_count": 456,
+        "anomaly_count": 491
+    },
+    "continual_ad_Candy": {
+        "image_auroc": 0.35138751825681913,
+        "pixel_ap": 0.02614581864782532,
+        "normal_count": 517,
+        "anomaly_count": 490
+    },
+    "continual_ad_Mouse": {
+        "image_auroc": 0.5952953128968603,
+        "pixel_ap": 0.10189731736167323,
+        "normal_count": 517,
+        "anomaly_count": 495
+    },
+    "continual_ad_Glasses-case": {
+        "image_auroc": 0.44326283680362405,
+        "pixel_ap": 0.02732136196914021,
+        "normal_count": 501,
+        "anomaly_count": 549
+    },
+    "continual_ad_Notebook": {
+        "image_auroc": 0.5091739077763461,
+        "pixel_ap": 0.048127305707959506,
+        "normal_count": 354,
+        "anomaly_count": 513
+    },
+    "continual_ad_Food-container": {
+        "image_auroc": 0.405902941639138,
+        "pixel_ap": 0.04319914535152877,
+        "normal_count": 520,
+        "anomaly_count": 489
+    },
+    "continual_ad_Cup": {
+        "image_auroc": 0.4304348860069125,
+        "pixel_ap": 0.018764068144977174,
+        "normal_count": 517,
+        "anomaly_count": 488
+    }
+}

@@ -1,0 +1,62 @@
+{
+    "viaduct_13 socket housing": {
+        "image_auroc": 0.44467455621301777,
+        "pixel_ap": 0.013414280361967984,
+        "normal_count": 65,
+        "anomaly_count": 52
+    },
+    "viaduct_47 mains tester": {
+        "image_auroc": 0.45499999999999996,
+        "pixel_ap": 0.0005415515166140657,
+        "normal_count": 50,
+        "anomaly_count": 20
+    },
+    "continual_ad_Band-aid": {
+        "image_auroc": 0.7867087018385738,
+        "pixel_ap": 0.06323537338291944,
+        "normal_count": 511,
+        "anomaly_count": 491
+    },
+    "viaduct_48 saw blade": {
+        "image_auroc": 0.43399999999999994,
+        "pixel_ap": 0.0013863221987607452,
+        "normal_count": 50,
+        "anomaly_count": 20
+    },
+    "viaduct_30 valve handle blue": {
+        "image_auroc": 0.6585714285714286,
+        "pixel_ap": 0.008334370268103155,
+        "normal_count": 50,
+        "anomaly_count": 14
+    },
+    "continual_ad_Watermelon": {
+        "image_auroc": 0.4805353862304261,
+        "pixel_ap": 0.0613189298760198,
+        "normal_count": 497,
+        "anomaly_count": 506
+    },
+    "continual_ad_Fork": {
+        "image_auroc": 0.43062855589714205,
+        "pixel_ap": 0.036097806937334775,
+        "normal_count": 537,
+        "anomaly_count": 507
+    },
+    "real_iad_pcb": {
+        "image_auroc": 0.5499324336244727,
+        "pixel_ap": 0.005507636584407106,
+        "normal_count": 2711,
+        "anomaly_count": 2279
+    },
+    "real_iad_usb": {
+        "image_auroc": 0.5408410960873765,
+        "pixel_ap": 0.004890697804235448,
+        "normal_count": 3286,
+        "anomaly_count": 1744
+    },
+    "real_iad_woodstick": {
+        "image_auroc": 0.6037945727192963,
+        "pixel_ap": 0.05276703866395555,
+        "normal_count": 3922,
+        "anomaly_count": 1063
+    }
+}

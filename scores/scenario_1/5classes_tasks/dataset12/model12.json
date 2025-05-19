@@ -1,0 +1,32 @@
+{
+    "mvtec_carpet": {
+        "image_auroc": 0.8553345388788427,
+        "pixel_ap": 0.43828184185272473,
+        "normal_count": 28,
+        "anomaly_count": 79
+    },
+    "viaduct_01 shredded corn medium": {
+        "image_auroc": 0.7597724039829303,
+        "pixel_ap": 0.16510720732603473,
+        "normal_count": 185,
+        "anomaly_count": 95
+    },
+    "visa_pcb3": {
+        "image_auroc": 0.49812981298129816,
+        "pixel_ap": 0.01298054296547609,
+        "normal_count": 101,
+        "anomaly_count": 90
+    },
+    "real_iad_phone_battery": {
+        "image_auroc": 0.5146786280579885,
+        "pixel_ap": 0.008357512134570496,
+        "normal_count": 3440,
+        "anomaly_count": 1540
+    },
+    "real_iad_mounts": {
+        "image_auroc": 0.6674098134840822,
+        "pixel_ap": 0.037081425484552975,
+        "normal_count": 3702,
+        "anomaly_count": 1328
+    }
+}

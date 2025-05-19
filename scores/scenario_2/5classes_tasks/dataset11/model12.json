@@ -1,0 +1,32 @@
+{
+    "continual_ad_Fork": {
+        "image_auroc": 0.4446629863475588,
+        "pixel_ap": 0.03618918983163747,
+        "normal_count": 537,
+        "anomaly_count": 507
+    },
+    "viaduct_30 valve handle blue": {
+        "image_auroc": 0.62,
+        "pixel_ap": 0.008898793242681688,
+        "normal_count": 50,
+        "anomaly_count": 14
+    },
+    "viaduct_26 hose screw fitting": {
+        "image_auroc": 0.43578947368421045,
+        "pixel_ap": 0.006536249227389506,
+        "normal_count": 50,
+        "anomaly_count": 19
+    },
+    "real_iad_regulator": {
+        "image_auroc": 0.4422373971613024,
+        "pixel_ap": 0.0006669307425032644,
+        "normal_count": 4010,
+        "anomaly_count": 1070
+    },
+    "real_iad_pcb": {
+        "image_auroc": 0.5647382828704469,
+        "pixel_ap": 0.005245329647300007,
+        "normal_count": 2711,
+        "anomaly_count": 2279
+    }
+}

@@ -1,0 +1,62 @@
+{
+    "viaduct_01 shredded corn medium": {
+        "image_auroc": 0.7465718349928876,
+        "pixel_ap": 0.15591705321606752,
+        "normal_count": 185,
+        "anomaly_count": 95
+    },
+    "mpdd_bracket_white": {
+        "image_auroc": 0.475,
+        "pixel_ap": 0.004912505347010702,
+        "normal_count": 30,
+        "anomaly_count": 20
+    },
+    "continual_ad_Egg": {
+        "image_auroc": 0.7490262796807797,
+        "pixel_ap": 0.33037705393583416,
+        "normal_count": 662,
+        "anomaly_count": 491
+    },
+    "viaduct_27 L-fitting": {
+        "image_auroc": 0.4375,
+        "pixel_ap": 0.004121112655846786,
+        "normal_count": 50,
+        "anomaly_count": 16
+    },
+    "viaduct_24 pan screw": {
+        "image_auroc": 0.48253846153846147,
+        "pixel_ap": 0.006423138663231603,
+        "normal_count": 130,
+        "anomaly_count": 100
+    },
+    "continual_ad_Mouse": {
+        "image_auroc": 0.59579743274134,
+        "pixel_ap": 0.10680519831943916,
+        "normal_count": 517,
+        "anomaly_count": 495
+    },
+    "mvtec_tile": {
+        "image_auroc": 0.5794430794430795,
+        "pixel_ap": 0.27238470597691067,
+        "normal_count": 33,
+        "anomaly_count": 74
+    },
+    "viaduct_05 cable end sleeve": {
+        "image_auroc": 0.6442857142857142,
+        "pixel_ap": 0.0073201966440103,
+        "normal_count": 210,
+        "anomaly_count": 40
+    },
+    "real_iad_vcpill": {
+        "image_auroc": 0.5616813184689994,
+        "pixel_ap": 0.06015888418691549,
+        "normal_count": 3545,
+        "anomaly_count": 1460
+    },
+    "real_iad_audiojack": {
+        "image_auroc": 0.5112370565325464,
+        "pixel_ap": 0.020854544877861182,
+        "normal_count": 3744,
+        "anomaly_count": 1286
+    }
+}

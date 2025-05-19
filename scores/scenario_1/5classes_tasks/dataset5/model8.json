@@ -1,0 +1,32 @@
+{
+    "continual_ad_Cup": {
+        "image_auroc": 0.4492560325966325,
+        "pixel_ap": 0.021418498179275047,
+        "normal_count": 517,
+        "anomaly_count": 488
+    },
+    "mvtec_tile": {
+        "image_auroc": 0.5622440622440622,
+        "pixel_ap": 0.2671896931905432,
+        "normal_count": 33,
+        "anomaly_count": 74
+    },
+    "viaduct_32 bone pliers": {
+        "image_auroc": 0.5603603603603603,
+        "pixel_ap": 0.003550216350041502,
+        "normal_count": 185,
+        "anomaly_count": 63
+    },
+    "visa_macaroni1": {
+        "image_auroc": 0.669888888888889,
+        "pixel_ap": 0.007205744798303541,
+        "normal_count": 100,
+        "anomaly_count": 90
+    },
+    "viaduct_17 cherry": {
+        "image_auroc": 0.5168181818181818,
+        "pixel_ap": 0.007965773180578721,
+        "normal_count": 275,
+        "anomaly_count": 112
+    }
+}

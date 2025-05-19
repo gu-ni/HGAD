@@ -1,6 +1,7 @@
 import os
 import json
 from PIL import Image
+import random
 import torch
 from torch.utils.data import Dataset
 from torchvision import transforms as T
@@ -166,28 +167,44 @@ class JSONDatasetForChunk(Dataset):
         "BTAD": "/datasets/MegaInspection/non_megainspection/BTAD",
         "MPDD": "/datasets/MegaInspection/non_megainspection/MPDD"
     }
-
-    def resolve_path(self, relative_path):
-        if not relative_path:
-            return None
-        if os.path.isabs(relative_path):
-            return relative_path
-        parts = relative_path.split("/", 1)
-        if len(parts) != 2:
-            return None
-        prefix, sub_path = parts
-        root = self.dataset_root_map.get(prefix, "")
-        return os.path.normpath(os.path.join(root, sub_path))
+    
+    json_path_map = {
+        "meta_continual_ad_test_total": "continual_ad",
+        "meta_mvtec": "mvtec_anomaly_detection",
+        "meta_visa": "VisA_20220922"
+    }
+    
+    def resolve_path(self, relative_path, zero_shot_category=None):
+        if zero_shot_category:
+            data_root = self.json_path_map[zero_shot_category]
+            root = self.dataset_root_map.get(data_root, "")
+            if not relative_path:
+                return None
+            if os.path.isabs(relative_path):
+                return relative_path
+            return os.path.normpath(os.path.join(root, relative_path))
+            
+        else:
+            if not relative_path:
+                return None
+            if os.path.isabs(relative_path):
+                return relative_path
+            parts = relative_path.split("/", 1)
+            if len(parts) != 2:
+                return None
+            prefix, sub_path = parts
+            root = self.dataset_root_map.get(prefix, "")
+            return os.path.normpath(os.path.join(root, sub_path))
     
     def __init__(self, json_data, img_size=336, crp_size=336, msk_size=336, train=False,
-                 class_mapping_json_path=None):
+                 class_mapping_json_path=None, zero_shot_category=None):
         
         self.samples = []
         self.num_all_samples = 0
         for cls_name, samples in json_data.items():
             for sample in samples:
                 self.num_all_samples += 1
-                img_path = self.resolve_path(sample["img_path"])
+                img_path = self.resolve_path(sample["img_path"], zero_shot_category)
                 anomaly = sample.get("anomaly", 0)
 
                 if train:
@@ -195,12 +212,13 @@ class JSONDatasetForChunk(Dataset):
                         continue  # ⛔ skip abnormal sample during training
                     mask_path = ""  # not used
                 else:
-                    mask_path = self.resolve_path(sample["mask_path"]) if sample.get("mask_path") else ""
+                    mask_path = self.resolve_path(sample["mask_path"], zero_shot_category) if sample.get("mask_path") else ""
 
                 self.samples.append((img_path, cls_name, mask_path, anomaly))
                 
         self.train = train
         self.masksize = msk_size
+        self.zero_shot_category = zero_shot_category
 
         self.transform = T.Compose([
             T.Resize(img_size),
@@ -239,8 +257,11 @@ class JSONDatasetForChunk(Dataset):
             mask = self.target_transform(mask)
         else:
             mask = torch.zeros((1, self.masksize, self.masksize), dtype=torch.float32)
-
-        label = self.class_to_idx[cls_name]
+        
+        if self.zero_shot_category and False:
+            label = random.choice(list(self.class_to_idx.values()))
+        else:
+            label = self.class_to_idx[cls_name]
         
         return image, label, mask, anomaly
 
@@ -248,7 +269,7 @@ class JSONDatasetForChunk(Dataset):
 
 def prepare_loader_from_json_by_chunk(json_data, batch_size=8, img_size=336, 
                              msk_size=336, num_workers=2, train=False,
-                             class_mapping_json_path=None):
+                             class_mapping_json_path=None, zero_shot_category=None):
     
     dataset = JSONDatasetForChunk(
         json_data,
@@ -257,6 +278,7 @@ def prepare_loader_from_json_by_chunk(json_data, batch_size=8, img_size=336,
         msk_size=msk_size,
         train=train,
         class_mapping_json_path=class_mapping_json_path,
+        zero_shot_category=zero_shot_category
     )
     loader = DataLoader(dataset, batch_size=batch_size, shuffle=train, num_workers=num_workers, pin_memory=True)
     return loader

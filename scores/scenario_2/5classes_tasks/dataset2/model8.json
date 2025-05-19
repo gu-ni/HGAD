@@ -1,0 +1,32 @@
+{
+    "continual_ad_Mouse": {
+        "image_auroc": 0.6022390246761621,
+        "pixel_ap": 0.10665377520940009,
+        "normal_count": 517,
+        "anomaly_count": 495
+    },
+    "viaduct_22 device box": {
+        "image_auroc": 0.2922222222222222,
+        "pixel_ap": 0.0006283234672426435,
+        "normal_count": 50,
+        "anomaly_count": 36
+    },
+    "viaduct_13 socket housing": {
+        "image_auroc": 0.48076923076923067,
+        "pixel_ap": 0.011797891024968657,
+        "normal_count": 65,
+        "anomaly_count": 52
+    },
+    "real_iad_audiojack": {
+        "image_auroc": 0.5020266745091784,
+        "pixel_ap": 0.016265162386473055,
+        "normal_count": 3744,
+        "anomaly_count": 1286
+    },
+    "real_iad_fire_hood": {
+        "image_auroc": 0.573478141353261,
+        "pixel_ap": 0.03174498743667572,
+        "normal_count": 3665,
+        "anomaly_count": 1340
+    }
+}

@@ -1,0 +1,74 @@
+{
+    "candle": {
+        "image_auroc": 0.46740000000000004,
+        "pixel_ap": 0.014914556717351918,
+        "normal_count": 100,
+        "anomaly_count": 100
+    },
+    "capsules": {
+        "image_auroc": 0.5705,
+        "pixel_ap": 0.008918956877574626,
+        "normal_count": 60,
+        "anomaly_count": 100
+    },
+    "cashew": {
+        "image_auroc": 0.527,
+        "pixel_ap": 0.043972795939777896,
+        "normal_count": 50,
+        "anomaly_count": 100
+    },
+    "chewinggum": {
+        "image_auroc": 0.5556000000000001,
+        "pixel_ap": 0.04475307408784433,
+        "normal_count": 50,
+        "anomaly_count": 100
+    },
+    "fryum": {
+        "image_auroc": 0.3992,
+        "pixel_ap": 0.08701414671751773,
+        "normal_count": 50,
+        "anomaly_count": 100
+    },
+    "macaroni1": {
+        "image_auroc": 0.5732999999999999,
+        "pixel_ap": 0.006454218387468052,
+        "normal_count": 100,
+        "anomaly_count": 100
+    },
+    "macaroni2": {
+        "image_auroc": 0.6072,
+        "pixel_ap": 0.004740102372494501,
+        "normal_count": 100,
+        "anomaly_count": 100
+    },
+    "pcb1": {
+        "image_auroc": 0.5899,
+        "pixel_ap": 0.014036163242382719,
+        "normal_count": 100,
+        "anomaly_count": 100
+    },
+    "pcb2": {
+        "image_auroc": 0.5129,
+        "pixel_ap": 0.005484821982536239,
+        "normal_count": 100,
+        "anomaly_count": 100
+    },
+    "pcb3": {
+        "image_auroc": 0.5310891089108911,
+        "pixel_ap": 0.012658758256319807,
+        "normal_count": 101,
+        "anomaly_count": 100
+    },
+    "pcb4": {
+        "image_auroc": 0.5543564356435644,
+        "pixel_ap": 0.014594098066169821,
+        "normal_count": 101,
+        "anomaly_count": 100
+    },
+    "pipe_fryum": {
+        "image_auroc": 0.6898,
+        "pixel_ap": 0.07914769466811429,
+        "normal_count": 50,
+        "anomaly_count": 100
+    }
+}

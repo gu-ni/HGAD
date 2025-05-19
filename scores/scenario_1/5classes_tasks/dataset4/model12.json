@@ -1,0 +1,32 @@
+{
+    "continual_ad_Egg": {
+        "image_auroc": 0.7160582324745725,
+        "pixel_ap": 0.2885055917906101,
+        "normal_count": 662,
+        "anomaly_count": 491
+    },
+    "viaduct_04 battery tray": {
+        "image_auroc": 0.6451282051282051,
+        "pixel_ap": 0.0018230923515162346,
+        "normal_count": 65,
+        "anomaly_count": 30
+    },
+    "continual_ad_Eraser": {
+        "image_auroc": 0.2540874393975862,
+        "pixel_ap": 0.07336735233612487,
+        "normal_count": 458,
+        "anomaly_count": 508
+    },
+    "viaduct_34 oblong pill": {
+        "image_auroc": 0.5224789915966387,
+        "pixel_ap": 0.06477928208445694,
+        "normal_count": 105,
+        "anomaly_count": 136
+    },
+    "real_iad_audiojack": {
+        "image_auroc": 0.5411301940024724,
+        "pixel_ap": 0.02373911253470289,
+        "normal_count": 3744,
+        "anomaly_count": 1286
+    }
+}

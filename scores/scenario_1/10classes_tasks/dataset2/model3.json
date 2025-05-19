@@ -1,0 +1,62 @@
+{
+    "mvtec_carpet": {
+        "image_auroc": 0.8291139240506329,
+        "pixel_ap": 0.4269999607008872,
+        "normal_count": 28,
+        "anomaly_count": 79
+    },
+    "continual_ad_Watermelon": {
+        "image_auroc": 0.46074271717260085,
+        "pixel_ap": 0.06628645760623049,
+        "normal_count": 497,
+        "anomaly_count": 506
+    },
+    "btad_02": {
+        "image_auroc": 0.8012280701754386,
+        "pixel_ap": 0.18478888764165988,
+        "normal_count": 30,
+        "anomaly_count": 190
+    },
+    "mpdd_bracket_black": {
+        "image_auroc": 0.3876689189189189,
+        "pixel_ap": 0.006042309969471481,
+        "normal_count": 32,
+        "anomaly_count": 37
+    },
+    "visa_pcb3": {
+        "image_auroc": 0.4610561056105611,
+        "pixel_ap": 0.013617312992221896,
+        "normal_count": 101,
+        "anomaly_count": 90
+    },
+    "continual_ad_Eraser": {
+        "image_auroc": 0.2412491833717292,
+        "pixel_ap": 0.07791967864550398,
+        "normal_count": 458,
+        "anomaly_count": 508
+    },
+    "viaduct_31 valve handle red": {
+        "image_auroc": 0.5638888888888889,
+        "pixel_ap": 0.008001676603465185,
+        "normal_count": 45,
+        "anomaly_count": 16
+    },
+    "visa_macaroni1": {
+        "image_auroc": 0.6563333333333333,
+        "pixel_ap": 0.00861877574228574,
+        "normal_count": 100,
+        "anomaly_count": 90
+    },
+    "real_iad_eraser": {
+        "image_auroc": 0.5657023504815797,
+        "pixel_ap": 0.030379335552709108,
+        "normal_count": 3567,
+        "anomaly_count": 1478
+    },
+    "real_iad_end_cap": {
+        "image_auroc": 0.5397826227945806,
+        "pixel_ap": 0.008857607704520787,
+        "normal_count": 2817,
+        "anomaly_count": 2173
+    }
+}

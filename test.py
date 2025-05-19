@@ -267,7 +267,7 @@ def calculate_scores(model, dataloader, device):
 
     normal_count = 0
     anomaly_count = 0
-    for i, (image, label, mask, anomaly) in tqdm(enumerate(dataloader)):
+    for i, (image, label, mask, anomaly) in tqdm(enumerate(dataloader), total=len(dataloader)):
         B = image.shape[0]
         image = image.to(device)
         label = label.to(device)
@@ -330,22 +330,27 @@ if __name__ == '__main__':
     
     model_weight_path = "/workspace/MegaInspection/HGAD/outputs"
     
-    if args.task_id == 0:
+    if args.json_path.startswith("base"):
         args.phase = "base"
     else:
         args.phase = "continual"
 
     if args.json_path.endswith("except_mvtec_visa"):
         scenario = "scenario_2"
+        base_json_path = "/workspace/meta_files/base_classes_except_mvtec_visa.json"
     elif args.json_path.endswith("except_continual_ad"):
         scenario = "scenario_3"
+        base_json_path = "/workspace/meta_files/base_classes_except_continual_ad.json"
     else:
         scenario = "scenario_1"
+        base_json_path = "/workspace/meta_files/base_classes.json"
     args.scenario = scenario
     
-    
-    
-    json_path = os.path.join("/workspace/meta_files", f"{args.json_path}.json")
+    if not args.json_path.startswith("base") and args.task_id == 0:
+        json_path = base_json_path
+    else:
+        json_path = os.path.join("/workspace/meta_files", f"{args.json_path}.json")
+        
     with open(json_path, 'r') as f:
         data_dict = json.load(f)
     if args.task_id is None or args.task_id == 0:
@@ -353,7 +358,6 @@ if __name__ == '__main__':
     else:
         task_key = f'task_{args.task_id}'
         data_dict = data_dict[task_key]['test']
-    
     
     if args.phase == 'base':
         class_mapping_json_path = os.path.join(model_weight_path, 
@@ -394,14 +398,14 @@ if __name__ == '__main__':
     
     os.makedirs(os.path.dirname(final_score_path), exist_ok=True)
     
-    for cls_name, samples in data_dict.items():
+    for i, (cls_name, samples) in enumerate(data_dict.items()):
         len_samples = len(samples)
-        print("cls_name:", cls_name)
+        print(f"[{i+1}/{len(data_dict)}] {cls_name}")
         print("length of samples:", len_samples)
         print()
-        if len_samples > 1500:
-            print(f"Sample size {len_samples} is larger than 1500, passing...")
-            continue
+        # if len_samples > 1500:
+        #     print(f"Sample size {len_samples} is larger than 1500, passing...")
+        #     continue
         
         if os.path.exists(final_score_path):
             with open(final_score_path, 'r') as f:

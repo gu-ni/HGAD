@@ -1,0 +1,32 @@
+{
+    "viaduct_40 surgical mask": {
+        "image_auroc": 0.5314750290360046,
+        "pixel_ap": 0.0003712264025344316,
+        "normal_count": 105,
+        "anomaly_count": 123
+    },
+    "viaduct_23 pipe clamp": {
+        "image_auroc": 0.5673684210526315,
+        "pixel_ap": 0.04683060089646133,
+        "normal_count": 50,
+        "anomaly_count": 19
+    },
+    "mpdd_bracket_brown": {
+        "image_auroc": 0.6894934333958724,
+        "pixel_ap": 0.058463307985473265,
+        "normal_count": 26,
+        "anomaly_count": 41
+    },
+    "continual_ad_Calculator": {
+        "image_auroc": 0.6278616600790513,
+        "pixel_ap": 0.007934796104202287,
+        "normal_count": 506,
+        "anomaly_count": 500
+    },
+    "viaduct_14 terminal block A": {
+        "image_auroc": 0.46882539682539687,
+        "pixel_ap": 0.0034465046396712795,
+        "normal_count": 105,
+        "anomaly_count": 75
+    }
+}

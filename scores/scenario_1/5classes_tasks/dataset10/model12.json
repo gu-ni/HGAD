@@ -1,0 +1,32 @@
+{
+    "visa_capsules": {
+        "image_auroc": 0.5274074074074074,
+        "pixel_ap": 0.009802703333209735,
+        "normal_count": 60,
+        "anomaly_count": 90
+    },
+    "viaduct_18 raspberry": {
+        "image_auroc": 0.486764705882353,
+        "pixel_ap": 0.0703935213812809,
+        "normal_count": 170,
+        "anomaly_count": 84
+    },
+    "viaduct_21 cylinder screw": {
+        "image_auroc": 0.5406565656565656,
+        "pixel_ap": 0.00490754359533004,
+        "normal_count": 180,
+        "anomaly_count": 22
+    },
+    "viaduct_05 cable end sleeve": {
+        "image_auroc": 0.6411904761904762,
+        "pixel_ap": 0.007491166022445081,
+        "normal_count": 210,
+        "anomaly_count": 40
+    },
+    "real_iad_eraser": {
+        "image_auroc": 0.5433803816597264,
+        "pixel_ap": 0.026491256701542662,
+        "normal_count": 3567,
+        "anomaly_count": 1478
+    }
+}

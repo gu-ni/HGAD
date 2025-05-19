@@ -1,0 +1,32 @@
+{
+    "mvtec_cable": {
+        "image_auroc": 0.5838940285954584,
+        "pixel_ap": 0.06764049002944077,
+        "normal_count": 58,
+        "anomaly_count": 82
+    },
+    "visa_fryum": {
+        "image_auroc": 0.4424444444444444,
+        "pixel_ap": 0.09841857709232284,
+        "normal_count": 50,
+        "anomaly_count": 90
+    },
+    "viaduct_27 L-fitting": {
+        "image_auroc": 0.44875,
+        "pixel_ap": 0.004118415561612013,
+        "normal_count": 50,
+        "anomaly_count": 16
+    },
+    "real_iad_fire_hood": {
+        "image_auroc": 0.6164499806560648,
+        "pixel_ap": 0.06096718169255763,
+        "normal_count": 3665,
+        "anomaly_count": 1340
+    },
+    "real_iad_transistor1": {
+        "image_auroc": 0.5770891816200816,
+        "pixel_ap": 0.016046125930679257,
+        "normal_count": 2873,
+        "anomaly_count": 2107
+    }
+}

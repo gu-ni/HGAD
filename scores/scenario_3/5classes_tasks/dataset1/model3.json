@@ -1,0 +1,32 @@
+{
+    "viaduct_38 round pill": {
+        "image_auroc": 0.44536585365853654,
+        "pixel_ap": 0.167005677361342,
+        "normal_count": 50,
+        "anomaly_count": 82
+    },
+    "viaduct_32 bone pliers": {
+        "image_auroc": 0.6194766194766195,
+        "pixel_ap": 0.003087343193586598,
+        "normal_count": 185,
+        "anomaly_count": 63
+    },
+    "viaduct_25 reinforcing sleeve": {
+        "image_auroc": 0.4472727272727273,
+        "pixel_ap": 0.008175573928794358,
+        "normal_count": 50,
+        "anomaly_count": 11
+    },
+    "real_iad_rolled_strip_base": {
+        "image_auroc": 0.5909277535581738,
+        "pixel_ap": 0.027167791060264238,
+        "normal_count": 2515,
+        "anomaly_count": 2515
+    },
+    "real_iad_toothbrush": {
+        "image_auroc": 0.5036351223495169,
+        "pixel_ap": 0.01601690684160911,
+        "normal_count": 2968,
+        "anomaly_count": 2017
+    }
+}

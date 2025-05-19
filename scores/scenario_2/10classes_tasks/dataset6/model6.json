@@ -1,0 +1,62 @@
+{
+    "btad_03": {
+        "image_auroc": 0.3929838709677419,
+        "pixel_ap": 0.020470626185486014,
+        "normal_count": 400,
+        "anomaly_count": 31
+    },
+    "viaduct_40 surgical mask": {
+        "image_auroc": 0.5316298877274488,
+        "pixel_ap": 0.0003825715610143984,
+        "normal_count": 105,
+        "anomaly_count": 123
+    },
+    "viaduct_39 self-tapping bolt": {
+        "image_auroc": 0.5531632653061224,
+        "pixel_ap": 0.05062249369243948,
+        "normal_count": 140,
+        "anomaly_count": 140
+    },
+    "viaduct_27 L-fitting": {
+        "image_auroc": 0.38125,
+        "pixel_ap": 0.004855668506006819,
+        "normal_count": 50,
+        "anomaly_count": 16
+    },
+    "viaduct_12 rotary encoder": {
+        "image_auroc": 0.27789473684210525,
+        "pixel_ap": 0.006318085778245362,
+        "normal_count": 50,
+        "anomaly_count": 19
+    },
+    "continual_ad_Dollar": {
+        "image_auroc": 0.5011286331114033,
+        "pixel_ap": 0.03898826225581381,
+        "normal_count": 391,
+        "anomaly_count": 494
+    },
+    "continual_ad_Calculator": {
+        "image_auroc": 0.6213359683794467,
+        "pixel_ap": 0.009387604072172725,
+        "normal_count": 506,
+        "anomaly_count": 500
+    },
+    "real_iad_zipper": {
+        "image_auroc": 0.7081838947952691,
+        "pixel_ap": 0.15248505358326955,
+        "normal_count": 2664,
+        "anomaly_count": 2321
+    },
+    "real_iad_toy": {
+        "image_auroc": 0.5249160509864415,
+        "pixel_ap": 0.004102763310532354,
+        "normal_count": 2825,
+        "anomaly_count": 2180
+    },
+    "real_iad_bottle_cap": {
+        "image_auroc": 0.6136463034995266,
+        "pixel_ap": 0.07790516336674765,
+        "normal_count": 3374,
+        "anomaly_count": 1621
+    }
+}
